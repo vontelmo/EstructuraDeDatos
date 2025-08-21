@@ -1,16 +1,24 @@
-using MyLinkedList; 
-using UnityEngine;
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
-public class TP02Execute : MonoBehaviour
+public class TP01Execute : MonoBehaviour
 {
-
-    MyList<int> list = new MyList<int>();
+    SimpleList<int> list = new SimpleList<int>();
 
 
     [SerializeField] GameObject listSquare;
     [SerializeField] Transform gridLayout;
     [SerializeField] TMP_InputField inputField;
+    private string inputText;
+
+
+
+    private void Start()
+    {
+
+    }
 
     void DrawList()
     {
@@ -42,17 +50,17 @@ public class TP02Execute : MonoBehaviour
         if (int.TryParse(inputText, out int value))
         {
             list.Add(value);
-            inputField.text = "";
+            inputField.text = ""; 
         }
         else
         {
             Debug.LogWarning("Valor no valido");
         }
         DrawList();
-
+        
     }
 
-    public void RemoveToList()
+    public void RemoveToList() 
     {
         string inputText = inputField.text;
 
@@ -70,7 +78,7 @@ public class TP02Execute : MonoBehaviour
 
     }
 
-    public void ClearList()
+    public void ClearList() 
     {
         list.Clear();
         DrawList();
@@ -78,19 +86,12 @@ public class TP02Execute : MonoBehaviour
 
     public void AddRangeToList()
     {
-        list.AddRange(new int[] { 1, 2, 3 });
+        list.AddRange(new int[] {1,2,3});
         DrawList();
     }
 
-
-    void Start()
+    public override string ToString()
     {
-        
+        return string.Join(", ", list); 
     }
-
-    void Update()
-    {
-       
-    }
-
 }
