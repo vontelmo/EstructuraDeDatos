@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MyStack<T>
@@ -71,12 +72,11 @@ public class MyStack<T>
     {
         // crea un nuevo array de tamaño count y solo toma los valores entre head y tail
         var items = new T[Count];
-        int index = 0;
 
         // copia los elementos en el rango de la cola (entre head y tail)s
-        for (int i = tail; index >= 0; i--)
+        for (int i = 0; i < Count; i++)
         {
-            items[index++] = stackArray[i];
+            items[i] = stackArray[i];
         }
 
         return items; // regresa un array
@@ -89,13 +89,12 @@ public class MyStack<T>
             return "[]";
         }
 
-        var items = new T[Count]; // crea un nuevo array de tamaño count y solo toma los valores entre head y tail
-        int index = 0;
+        T[] items = new T[Count]; // crea un nuevo array de tamaño count y solo toma los valores entre head y tail
 
         // copia los elementos en el rango de la cola (entre head y tail)
-        for (int i = tail; index >= 0; i--)
+        for (int i = 0; i < Count; i++)
         {
-            items[index++] = stackArray[i];
+            items[i] = stackArray[i];
         }
 
         return "[" + string.Join(", ", items) + "]";
