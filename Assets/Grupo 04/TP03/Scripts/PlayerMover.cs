@@ -24,7 +24,7 @@ public class PlayerMover : MonoBehaviour
 
     void ReactToDungeon()
     {
-        Debug.Log("¡Nuevo dungeon generado!");
+        Debug.Log("Nueva dungeon");
         positionStack.Clear();
         MoveTo( generator.SpawnedCells[0].transform.position);
 

@@ -78,12 +78,10 @@ public class MyQueue<T>
     {
         // crea un nuevo array de tamaño count y solo toma los valores entre head y tail
         var items = new T[Count];
-        int index = 0;
 
-        // copia los elementos en el rango de la cola (entre head y tail)s
-        for (int i = head; index < Count; i = (i + 1) % queueArray.Length)
+        for (int i = 0; i < Count; i++)
         {
-            items[index++] = queueArray[i];
+            items[i] = queueArray[i];        
         }
 
         return items; // regresa un array
@@ -97,12 +95,10 @@ public class MyQueue<T>
         }
 
         var items = new T[Count]; // crea un nuevo array de tamaño count y solo toma los valores entre head y tail
-        int index = 0;
 
-        // copia los elementos en el rango de la cola (entre head y tail)
-        for (int i = head; index < Count; i = (i + 1) % queueArray.Length)
+        for (int i = 0; i < Count; i++)
         {
-            items[index++] = queueArray[i];
+            items[i] = queueArray[i];
         }
 
         return "[" + string.Join(", ", items) + "]";

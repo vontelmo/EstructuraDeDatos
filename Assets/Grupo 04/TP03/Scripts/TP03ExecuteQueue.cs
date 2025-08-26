@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class TP03Execute : MonoBehaviour
+public class TP03ExecuteQueue : MonoBehaviour
 {
-    private MyStack<object> stack = new MyStack<object>();
+    private MyQueue<object> queue = new MyQueue<object>();
 
     [SerializeField] GameObject listSquare;
     [SerializeField] Transform gridLayout;
@@ -22,7 +22,7 @@ public class TP03Execute : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        for (int i = 0; i < stack.Count; i++)
+        for (int i = 0; i < queue.Count; i++)
         {
             GameObject newItem = Instantiate(listSquare, gridLayout);
 
@@ -41,10 +41,10 @@ public class TP03Execute : MonoBehaviour
     void Start()
     {
         typeDropdown.onValueChanged.AddListener(OnTypeChanged);
-        stack.Push(1);
-        stack.Push(2);
-        stack.Push(3);
-        Debug.Log(stack.Count);
+        queue.Enqueue(1);
+        queue.Enqueue(2);
+        queue.Enqueue(3);
+        Debug.Log(queue.Count);
         DrawList();
     }
 
@@ -58,18 +58,18 @@ public class TP03Execute : MonoBehaviour
             case 1: currentType = typeof(float); break;
             case 2: currentType = typeof(string); break;
         }
-        stack.Clear();
+        queue.Clear();
         DrawList();
 
     }
 
-    public void PushValue()
+    public void EnqueueValue()
     {
         object input = inputField.text;
         try
         {
             object value = Convert.ChangeType(input, currentType);
-            stack.Push(value);
+            queue.Enqueue(value);
         }
         catch
         {
@@ -79,12 +79,12 @@ public class TP03Execute : MonoBehaviour
 
     }
 
-    public void PopValue()
+    public void DequeueValue()
     {
-        if (stack.Count > 0)
+        if (queue.Count > 0)
         {
-            object value = stack.Pop();
-            Debug.Log($"POP: {value} , ({value.GetType().Name})");
+            object value = queue.Dequeue();
+            Debug.Log($"DEQUEUE : {value} , ({value.GetType().Name})");
         }
         DrawList();
 
@@ -92,46 +92,45 @@ public class TP03Execute : MonoBehaviour
 
     public void PeekValue()
     {
-        object value = stack.Peek();
+        object value = queue.Peek();
         Debug.Log($"PEEK: {value} ({value.GetType().Name})");
     }
 
-    public void ClearStack()
+    public void ClearQueue()
     {
-        stack.Clear();
+        queue.Clear();
         DrawList();
 
     }
 
-    public void ToArrayStack() 
+    public void ToArrayQueue()
     {
-        object[] array = stack.ToArray();
-        Debug.Log($"STACK ARRAY : {array}");
+        object[] array = queue.ToArray();
+        Debug.Log($"QUEUE ARRAY : {array}");
 
     }
 
-    public void ToStringStack()
+    public void ToStringQueue()
     {
-        string stringStack = stack.ToString();
-        Debug.Log(stringStack);
+        string stringqueue = queue.ToString();
+        Debug.Log(stringqueue);
     }
 
-    public void TryPopStack()
+    public void TryDequeue()
     {
         object value;
-        bool tryPop = stack.TryPop(out value);
-        Debug.Log($"TRYPOP : {tryPop} , {value} ");
+        bool tryPop = queue.TryDequeue(out value);
+        Debug.Log($"TRYDEQUEUE : {tryPop} , {value} ");
         DrawList();
 
     }
 
 
-    public void TryPeekStack()
+    public void TryPeekqueue()
     {
         object value;
-        bool tryPop = stack.TryPeek(out value);
+        bool tryPop = queue.TryPeek(out value);
         Debug.Log($"TRYPEEK : {tryPop} , {value} ");
     }
 
 }
-
