@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public static class Palindromo
+public static class Palindrom
 {
     public static string IsPalindrom(string word)
     {

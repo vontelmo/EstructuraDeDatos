@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Fibonacci
+public static class Fibonacci
 {
-    public int GetFibonacciSeries(int n)
+    public static int GetFibonacciSeries(int n)
     {
         if (n <= 1)
         {
@@ -14,12 +14,4 @@ public class Fibonacci
             return GetFibonacciSeries(n - 1) + GetFibonacciSeries(n - 2);
         }
     }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
-=======
-}
->>>>>>> Stashed changes

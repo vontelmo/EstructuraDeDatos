@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class QuickSort
+public static class QuickSort
 {
     // cambiado a quick sort (cambiar clase y nombre de script)
     public static void QuickSorting<T>(SimpleList<T> list) where T : IComparable<T>

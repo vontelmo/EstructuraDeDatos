@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SelectionSort
+public static class SelectionSort
 {
     public static void SelectionSorting<T>(SimpleList<T> list) where T : IComparable<T>
     {
