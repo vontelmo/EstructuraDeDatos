@@ -94,4 +94,19 @@ public class TP01Execute : MonoBehaviour
     {
         return string.Join(", ", list); 
     }
+
+    public void BubbleSortList()
+    {
+        BubbleSort.BubbleSorting(list);
+    }
+
+    public void SelectionSortList()
+    {
+        SelectionSort.SelectionSorting(list);
+    }
+
+    public void QuickSortList()
+    {
+        QuickSort.QuickSorting(list);
+    }
 }
