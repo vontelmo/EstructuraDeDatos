@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class QuickSort
 {
+    // cambiado a quick sort (cambiar clase y nombre de script)
     public static void QuickSorting<T>(SimpleList<T> list) where T : IComparable<T>
     {
         QuickSortInternal(list, 0, list.Count - 1);
