@@ -9,9 +9,11 @@ namespace MyLinkedList
     {
         // Nodo inicial (root)
         private MyNode<T> root;
+        public MyNode<T> Root { get; private set; }
 
         // Nodo final (tail)
         private MyNode<T> tail;
+        public MyNode<T> Tail { get; private set; }
 
         // Constructor
         public MyList()

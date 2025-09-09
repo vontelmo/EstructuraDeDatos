@@ -82,15 +82,18 @@ public class TP02Execute : MonoBehaviour
         DrawList();
     }
 
-
-    void Start()
+    public void SortByBubble()
     {
-        
+        BubbleSort.BubbleSorting(list);
     }
 
-    void Update()
+    public void SortBySelection()
     {
-       
+        SelectionSort.SelectionSorting(list);
     }
 
+    public void SortByQuick()
+    {
+        QuickSort.QuickSorting(list);
+    }
 }

@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PreviousNumSum
+public static class PreviousNumSum
 {
-    public int SumAllPreviousNum(int n)
+    public static int SumAllPreviousNum(int n)
     {
         if (n <= 1)
         {
