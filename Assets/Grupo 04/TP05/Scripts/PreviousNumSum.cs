@@ -7,11 +7,11 @@ public static class PreviousNumSum
     {
         if (n <= 1)
         {
-            return n;
+            return 0;
         }
         else
         {
-            return n + SumAllPreviousNum(n - 1); 
+            return (n - 1) + SumAllPreviousNum(n - 1);
         }
     }
 }
