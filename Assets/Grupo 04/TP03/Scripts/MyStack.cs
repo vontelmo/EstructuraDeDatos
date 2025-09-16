@@ -9,13 +9,11 @@ public class MyStack<T>
     public int Count { get; private set; }
 
     private T[] stackArray;
-    private int tail;
     private const int defaultSize = 4;
 
     public MyStack()
     {
         stackArray = new T[defaultSize];
-        tail = 0;
         Count = 0;
     }
 
@@ -26,8 +24,7 @@ public class MyStack<T>
             Resize(); // llama a la funcion para expandir el array
         }
 
-        stackArray[tail] = item; // agrega item al tail del array
-        tail = (tail + 1) % stackArray.Length; // mueve el puntero tail de posicion de forma circular dentro de los limites del array
+        stackArray[Count] = item; // agrega item al final del array
         Count++;
     }
 
@@ -38,8 +35,8 @@ public class MyStack<T>
             throw new InvalidOperationException("Stack is empty.");
         }
 
-        tail = (tail - 1 + stackArray.Length) % stackArray.Length; // mueve el tail de forma circular hacia atrás
-        T item = stackArray[tail]; // toma el último elemento agregado
+        T item = stackArray[Count - 1]; // toma el último elemento agregado
+        stackArray[Count - 1] = default;
         Count--;
         return item;
     }
@@ -51,32 +48,31 @@ public class MyStack<T>
             throw new InvalidOperationException("Stack is empty.");
         }
 
-        // devuelve el valor de la cabeza de queue
-        return stackArray[tail];
+        // devuelve el valor del final de la pila
+        return stackArray[Count - 1];
     }
 
     public void Clear()
     {
-        // bucle para recorrer todos los indices del queue y asignarlos a valor default
+        // bucle para recorrer todos los elementos de la pila
         for (int i = 0; i < stackArray.Length; i++)
         {
             stackArray[i] = default;
         }
 
-        // reinicia los punteros y el contador del queue
-        tail = 0;
+        // reinicia el contador de la pila
         Count = 0;
     }
 
     public T[] ToArray()
     {
-        // crea un nuevo array de tamaño count y solo toma los valores entre head y tail
+        // crea un nuevo array de tamaño count
         var items = new T[Count];
 
-        // copia los elementos en el rango de la cola (entre head y tail)s
+        // copia los elementos en el rango de la pila
         for (int i = 0; i < Count; i++)
         {
-            items[i] = stackArray[i];
+            items[i] = stackArray[Count - 1 - i];
         }
 
         return items; // regresa un array
@@ -89,12 +85,12 @@ public class MyStack<T>
             return "[]";
         }
 
-        T[] items = new T[Count]; // crea un nuevo array de tamaño count y solo toma los valores entre head y tail
+        T[] items = new T[Count]; // crea un nuevo array de tamaño count¿
 
-        // copia los elementos en el rango de la cola (entre head y tail)
+        // copia los elementos en la pila
         for (int i = 0; i < Count; i++)
         {
-            items[i] = stackArray[i];
+            items[i] = stackArray[Count - 1 - i];
         }
 
         return "[" + string.Join(", ", items) + "]";
@@ -108,10 +104,8 @@ public class MyStack<T>
             return false;
         }
 
-        // El último elemento agregado está en (tail - 1)
-        tail = (tail - 1 + stackArray.Length) % stackArray.Length; // Mueve el puntero tail hacia atrás
-        item = stackArray[tail]; // Obtiene el último elemento
-        stackArray[tail] = default; // Establece ese índice como el valor por defecto
+        item = stackArray[Count - 1]; // Obtiene el último elemento
+        stackArray[Count - 1] = default; // Establece ese índice como el valor por defecto
         Count--; // Decrementa el contador de elementos
 
         return true;
@@ -125,9 +119,7 @@ public class MyStack<T>
             return false;
         }
 
-        // El último elemento agregado está en (tail - 1)
-        int peekIndex = (tail - 1 + stackArray.Length) % stackArray.Length; // Calcula el índice del último elemento
-        item = stackArray[peekIndex]; // Obtiene el último elemento sin modificar el `tail`
+        item = stackArray[Count - 1]; // Obtiene el último elemento
 
         return true;
     }
@@ -136,14 +128,13 @@ public class MyStack<T>
     private void Resize()
     {
         int newCapacity = stackArray.Length * 2; // crea una variable local con el doble del tamaño del array
-        T[] newArray = new T[newCapacity]; // inicia un nuevo array con la capacidad duplicada
+        T[] newArray = new T[newCapacity];
 
         for (int i = 0; i < Count; i++)
         {
-            newArray[i] = stackArray[(tail - 1 - i + stackArray.Length) % stackArray.Length]; // copia los valores del array original
+            newArray[i] = stackArray[i];
         }
 
-        stackArray = newArray; // asigna el nuevo array al del queue
-        tail = Count; // actualiza el puntero tail
+        stackArray = newArray; // asigna el nuevo array al de la pila
     }
 }
