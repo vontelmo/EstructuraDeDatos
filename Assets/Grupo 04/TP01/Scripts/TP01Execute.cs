@@ -98,15 +98,20 @@ public class TP01Execute : MonoBehaviour
     public void SortByBubble()
     {
         BubbleSort.BubbleSorting(list);
+        DrawList();
     }
 
     public void SortBySelection()
     {
         SelectionSort.SelectionSorting(list);
+        DrawList();
+
     }
 
     public void SortByQuick()
     {
         QuickSort.QuickSorting(list);
+        DrawList();
+
     }
 }
