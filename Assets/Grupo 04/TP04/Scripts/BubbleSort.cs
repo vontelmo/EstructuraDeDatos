@@ -1,7 +1,31 @@
-using MyLinkedList;
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using MyLinkedList;
+
+public class Foo2
+{
+    SimpleList<MiLista> list = new SimpleList<MiLista>();
+
+    void Func()
+    {
+        BubbleSort.BubbleSorting<MiLista>(list);
+    }
+}
+
+public class MiLista : IComparable<MiLista>
+{
+    int score;
+    string name = " ";
+
+    public int CompareTo(MiLista other)
+    {
+        if (score > other.score)
+            return 1;
+        else if (score > other.score)
+            return -1;
+
+        return 0;
+    }
+}
 
 public static class BubbleSort
 {

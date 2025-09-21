@@ -24,27 +24,23 @@ public class TP05Execute : MonoBehaviour
         typeDropdown.onValueChanged.AddListener(OnTypeChanged);
     }
 
-    //void DrawList()
-    //{
-    //    foreach (Transform child in gridLayout)
-    //    {
-    //        Destroy(child.gameObject);
-    //    }
+    void DrawResult()
+    {
+        foreach (Transform child in gridLayout)
+        {
+            Destroy(child.gameObject);
+        }
 
-    //    for (int i = 0; i < queue.Count; i++)
-    //    {
-    //        GameObject newItem = Instantiate(listSquare, gridLayout);
+        GameObject newItem = Instantiate(listSquare, gridLayout);
+        TMP_Text childText = newItem.GetComponentInChildren<TMP_Text>();
+        if (childText != null)
+        {
+            if (childText.text == default) return;
 
 
-    //        TMP_Text childText = newItem.GetComponentInChildren<TMP_Text>();
-    //        if (childText != null)
-    //        {
-    //            if (childText.text == default) return;
+        }
 
-    //        }
-
-    //    }
-    //}
+    }
 
 
 
@@ -56,7 +52,6 @@ public class TP05Execute : MonoBehaviour
             case 1: currentType = typeof(float); break;
             case 2: currentType = typeof(string); break;
         }
-
     }
 
     public void FactorialButton()
@@ -67,6 +62,7 @@ public class TP05Execute : MonoBehaviour
             object value = Convert.ChangeType(input, currentType);
             value = factorial.GetFactorial((int)value);
             Debug.Log(value);
+            DrawResult();
         }
         catch
         {
@@ -83,6 +79,7 @@ public class TP05Execute : MonoBehaviour
             object value = Convert.ChangeType(input, currentType);
             value = Fibonacci.GetFibonacciSeries((int)value);
             Debug.Log(value);
+            DrawResult();
         }
         catch
         {
@@ -97,7 +94,9 @@ public class TP05Execute : MonoBehaviour
         {
             object value = Convert.ChangeType(input, currentType);
             value = Palindromo.IsPalindrom(value.ToString());
-            Debug.Log(value);
+            Debug.Log(input);
+            DrawResult();
+
         }
         catch
         {
@@ -113,6 +112,7 @@ public class TP05Execute : MonoBehaviour
             object value = Convert.ChangeType(input, currentType);
             value = PreviousNumSum.SumAllPreviousNum((int)value);
             Debug.Log(value);
+            DrawResult();
         }
         catch
         {
@@ -120,14 +120,21 @@ public class TP05Execute : MonoBehaviour
         }
     }
 
+    public TMP_Text text;
+
     public void PyramidButton()
     {
-        object input = inputField.text;
+        string input = inputField.text;
+        
+        if (int.TryParse(input, out int inputInt))
+        {
+            string output = pyramid.CreateRecursive(inputInt);
+            text.text = output;
+            Debug.Log(output);
+        }
+
         try
         {
-            object value = Convert.ChangeType(input, currentType);
-            value = pyramid.Create((int)value);
-            Debug.Log(value);
         }
         catch
         {

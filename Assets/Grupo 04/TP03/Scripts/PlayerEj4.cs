@@ -10,7 +10,8 @@ public class PlayerEj4 : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
 
-    private bool triggerActivated = false;
+    [SerializeField] private bool triggerActivated = false;
+    [SerializeField] private GameObject shadow;
 
     public bool TriggerActivated => triggerActivated;
 
@@ -27,7 +28,6 @@ public class PlayerEj4 : MonoBehaviour
 
         rb.velocity = input * moveSpeed;
 
-        Debug.Log(queueInputs.Count);
     }
 
 
@@ -35,11 +35,10 @@ public class PlayerEj4 : MonoBehaviour
     {
         if (rb != null) 
         {
-            triggerActivated = true;    
+            triggerActivated = true;
+            shadow.SetActive(true);
         }
-
     }
-
 }
 
 
