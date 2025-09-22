@@ -1,5 +1,6 @@
 using MyLinkedList; 
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class TP02Execute : MonoBehaviour
@@ -84,16 +85,22 @@ public class TP02Execute : MonoBehaviour
 
     public void SortByBubble()
     {
-        BubbleSort.BubbleSorting(list);
+        BubbleSort.BubbleSortingMyList(list);
+        Debug.Log(list.ToString());
+        DrawList();
     }
 
     public void SortBySelection()
     {
         SelectionSort.SelectionSorting(list);
+        Debug.Log(list.ToString());
+        DrawList();
     }
 
     public void SortByQuick()
     {
         QuickSort.QuickSorting(list);
+        Debug.Log(list.ToString());
+        DrawList();
     }
 }

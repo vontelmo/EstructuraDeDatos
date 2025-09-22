@@ -29,12 +29,12 @@ public static class SelectionSort
 
     public static void SelectionSorting<T>(MyList<T> list) where T : IComparable<T>
     {
-        if (list.Tail == null || list.Tail.Next == null)
+        if (list == null || list.Count <= 1)
         {
             return;
         }
 
-        MyNode<T> currentOuter = list.Tail;
+        MyNode<T> currentOuter = list.Root;
 
         while (currentOuter != null)
         {
@@ -50,7 +50,7 @@ public static class SelectionSort
                 currentInner = currentInner.Next;
             }
 
-            // Swap data if a smaller element was found
+            // Intercambiar los valores si se encontro un valor menor
             if (minNode != currentOuter)
             {
                 T tempData = currentOuter.Value;

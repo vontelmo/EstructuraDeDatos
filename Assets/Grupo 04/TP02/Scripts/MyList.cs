@@ -9,11 +9,11 @@ namespace MyLinkedList
     {
         // Nodo inicial (root)
         private MyNode<T> root;
-        public MyNode<T> Root { get; private set; }
+        public MyNode<T> Root { get => root; private set => root = value; }
 
         // Nodo final (tail)
         private MyNode<T> tail;
-        public MyNode<T> Tail { get; private set; }
+        public MyNode<T> Tail { get => tail; private set=> tail = value; }
 
         // Constructor
         public MyList()
@@ -60,6 +60,8 @@ namespace MyLinkedList
                 tail = newNode;
             }
 
+            Root = root;
+            Tail = tail;
             Count++;
         }
 
@@ -121,6 +123,8 @@ namespace MyLinkedList
                         current.Next.Prev = current.Prev;
                     }
 
+                    Root = root;
+                    Tail = tail;
                     Count--;
                     return true;
                 }
@@ -186,6 +190,8 @@ namespace MyLinkedList
                 current.Prev = newNode;
             }
 
+            Root = root;
+            Tail = tail;
             Count++;
         }
 
@@ -198,6 +204,9 @@ namespace MyLinkedList
             root = null;
             tail = null;
             Count = 0;
+
+            Root = null;
+            Tail = null;
         }
 
         // Devuelve la lista como string, mostrando los enlaces
