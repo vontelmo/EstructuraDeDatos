@@ -18,16 +18,16 @@ EditorBuildSettings:
     path: Assets/Grupo 04/TP02/Scenes/TP 2 Ejercicio 2.unity
     guid: aebc31a69e6ca2b4da3b4f28b6521ad9
   - enabled: 1
-    path: Assets/Grupo 04/TP03/Scenes/TP 4 Ejercicio 1 Stack LIFO.unity
+    path: Assets/Grupo 04/TP03/Scenes/TP 3 Ejercicio 1 Stack LIFO.unity
     guid: 4096b370e267e9344a052f280729dd1a
   - enabled: 1
-    path: Assets/Grupo 04/TP03/Scenes/TP 4 Ejercicio Queue FIFO.unity
+    path: Assets/Grupo 04/TP03/Scenes/TP 3 Ejercicio Queue FIFO.unity
     guid: 26aa0d88004035145b8ea5b0d7d44c9d
   - enabled: 1
-    path: Assets/Grupo 04/TP03/Scenes/TP 4 Ejercicio Queue Shadow.unity
+    path: Assets/Grupo 04/TP03/Scenes/TP 3 Ejercicio Queue Shadow.unity
     guid: 71d61139c637dd54a9ea4fc091505700
   - enabled: 1
-    path: Assets/Grupo 04/TP03/Scenes/TP 4 Ejercicio Undo.unity
+    path: Assets/Grupo 04/TP03/Scenes/TP 3 Ejercicio Undo.unity
     guid: 29402daa65f9f3e49a0ad0cd6699f27f
   - enabled: 1
     path: Assets/Grupo 04/TP04/Scenes/TP04.unity

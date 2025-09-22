@@ -30,7 +30,7 @@ public class TP03ExecuteQueue : MonoBehaviour
             TMP_Text childText = newItem.GetComponentInChildren<TMP_Text>();
             if (childText != null)
             {
-                if (childText.text == default) return;
+                childText.text = queue.ToArray()[i]?.ToString() ?? "null";
 
             }
 

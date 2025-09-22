@@ -25,12 +25,14 @@ public class TP03Execute : MonoBehaviour
         for (int i = 0; i < stack.Count; i++)
         {
             GameObject newItem = Instantiate(listSquare, gridLayout);
-
+            
 
             TMP_Text childText = newItem.GetComponentInChildren<TMP_Text>();
             if (childText != null)
             {
                 if (childText.text == default) return;
+                childText.text = stack.ToArray()[i].ToString();
+
 
             }
 

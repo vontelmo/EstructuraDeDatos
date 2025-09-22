@@ -81,7 +81,7 @@ public class MyQueue<T>
 
         for (int i = 0; i < Count; i++)
         {
-            items[i] = queueArray[i];        
+            items[i] = queueArray[(head + i) % queueArray.Length];
         }
 
         return items; // regresa un array
