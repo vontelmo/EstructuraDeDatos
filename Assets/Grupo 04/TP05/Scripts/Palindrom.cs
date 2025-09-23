@@ -9,7 +9,7 @@ public static class Palindromo
 
         if (word.Length <= 1)
         {
-            return word + " es un palindromo.";
+            return " es un palindromo.";
         }
         else if (word[0] != word[word.Length - 1])
         {
