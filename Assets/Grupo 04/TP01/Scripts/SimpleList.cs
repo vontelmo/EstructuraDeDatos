@@ -83,5 +83,4 @@ public class SimpleList<T> : ISimpleList<T>
         }
         return false;
     }
-
 }
