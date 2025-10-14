@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4020fb05857c24e8529f18432b36eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodePrefab: {fileID: 7167784996711084924, guid: a45d980d44446f04cb66d60ac18a3df0, type: 3}
+  NodoPrefab: {fileID: 7167784996711084924, guid: a45d980d44446f04cb66d60ac18a3df0, type: 3}
   linePrefab: {fileID: 8031839666614865057, guid: e7a0c5ec13d507242b21cc0594969a47, type: 3}
   treeContainer: {fileID: 1068816382}
   xSpacing: 100

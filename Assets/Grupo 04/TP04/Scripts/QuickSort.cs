@@ -94,6 +94,6 @@ public static class QuickSort
         i.Value = high.Value;
         high.Value = tempPivot;
 
-        return i; // Return the pivot node
+        return i; // Return the pivot Node
     }
 }

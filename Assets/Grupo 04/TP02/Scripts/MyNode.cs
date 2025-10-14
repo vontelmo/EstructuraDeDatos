@@ -2,19 +2,19 @@ using System.Collections.Generic;
 
 namespace MyLinkedList
 {
-    // Nodo doblemente enlazado
+    // Node doblemente enlazado
     public class MyNode<T>
     {
-        // Valor que guarda el nodo
+        // Valor que guarda el Node
         public T Value { get; set; }
 
-        // Nodo anterior
+        // Node anterior
         public MyNode<T> Prev { get; set; }
 
-        // Nodo siguiente
+        // Node siguiente
         public MyNode<T> Next { get; set; }
 
-        // Constructor del nodo
+        // Constructor del Node
         public MyNode(T value)
         {
             Value = value;
@@ -28,7 +28,7 @@ namespace MyLinkedList
             return Value?.ToString() ?? "null";
         }
 
-        // Compara el valor del nodo con otro valor
+        // Compara el valor del Node con otro valor
         public bool IsEquals(T value)
         {
             return EqualityComparer<T>.Default.Equals(Value, value);

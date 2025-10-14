@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Insecto_soleador_sombra_ver_0: 2683089043320565103
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,114 +1,139 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class BST<T> where T : IComparable<T>
+namespace MyBST
 {
-    public Nodo<T> Root { get; private set; }
-
-    public void Insert(T value)
+    public class BST<T> where T : IComparable<T>
     {
-        Root = InsertRecursive(value, Root);
-    }
+        protected Node<T> root;
 
-    Nodo<T> InsertRecursive(T value, Nodo<T> current)
-    {
-        //Chequeamos si el nodo NO existe
-        if (current == null)
-            
-            //Si no existe, insertamos ahi
-            return new Nodo<T>(value);
+        public Node<T> Root => root;
 
-        //Si existe, chequeamos si es mayor
-        int cmp = value.CompareTo(current.datos);
-
-        //Si es mayor, llamamos a InsertRecursive con el hijo derecho
-        if (cmp < 0)
-            current.izq = InsertRecursive(value, current.izq);
-
-        //Si es menor, llamamos a InsertRecursive con el hijo izquierdo
-        else if (cmp >= 0)
-            current.der = InsertRecursive(value, current.der);
-
-        // Si es igual, no hace nada (no acepta duplicados)
-        return current;
-    }
-
-    public int GetHeight()
-    {
-        return GetHeightRecursive(Root);
-    }
-
-    int GetHeightRecursive(Nodo<T> current)
-    {
-        if (current == null)
-        return 0;
-       return Mathf.Max(GetHeightRecursive(current.izq), GetHeightRecursive(current.der));
-    }
-    
-    int GetBalanceFactor(Nodo<T> nodo)
-    {
-        return GetBalanceFactor(Root);
-    }
-
-    public void InOrder()
-    {
-        InOrderRecursive(Root);
-        //obtener valores en ascendente
-    }
-
-    void InOrderRecursive(Nodo<T> Nodo)
-    {
-        if (Nodo == null) return;
-        InOrderRecursive(Nodo.izq);
-        Debug.Log(Nodo.datos);
-        InOrderRecursive(Nodo.der);
-    }
-    public void PreOrder()
-    {
-        PreOrderRecursive(Root);
-        //copiar o serializar arbol
-    }
-
-    void PreOrderRecursive(Nodo<T> Nodo)
-    {
-        if (Nodo ==null)return;
-        Debug.Log(Nodo.datos);
-        PreOrderRecursive(Nodo.izq);
-        PreOrderRecursive(Nodo.der);
-    }
-
-    public void PostOrder()
-    {
-        PostOrderRecursive(Root);
-        //eliminar nodos
-    }
-
-    void PostOrderRecursive(Nodo<T> nodo)
-    {
-        if (nodo == null) return;
-
-        PostOrderRecursive(nodo.izq); 
-        PostOrderRecursive(nodo.der);
-        Debug.Log(nodo.datos);
-    }
-
-    public void LevelOrder()
-        //recorrer el arbol de izquierda a derecha
-    {
-        if (Root == null) return;
-        Queue<Nodo<T>> cola = new Queue<Nodo<T>>();
-        cola.Enqueue(Root);
-
-        while (cola.Count > 0)
+        public BST()
         {
-            Nodo<T> current = cola.Dequeue();
-            Debug.Log(current.datos);
+            root = null;
+        }
 
-            if (current.izq != null) cola.Enqueue(current.izq);
-            if (current.der != null) cola.Enqueue(current.der);
+        public virtual bool Insert(T value) => Insert(root, value);
+
+        protected bool Insert(Node<T> current, T value)
+        {
+            if (current == null)
+            {
+                current = new Node<T>(value);
+            }
+            else if (value.CompareTo(current.Value) < 0)
+            {
+                Insert(current.left, value);
+            }
+            else if (value.CompareTo(current.Value) > 0)
+            {
+                Insert(current.right, value);
+            }
+            else
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public int GetHeight()
+        {
+            return GetHeightRecursive(root);
+        }
+
+        private int GetHeightRecursive(Node<T> current)
+        {
+            if (current == null)
+            {
+                return 0;
+            }
+
+            return Mathf.Max(GetHeightRecursive(current.left), GetHeightRecursive(current.right));
+        }
+
+        protected virtual int GetBalanceFactor(Node<T> Node)
+        {
+            return GetBalanceFactor(root);
+        }
+
+        public void InOrder()
+        {
+            InOrderRecursive(root);
+            //obtener valores en ascendente
+        }
+
+        private void InOrderRecursive(Node<T> Node)
+        {
+            if (Node == null)
+            {
+                return;
+            }
+
+            InOrderRecursive(Node.left);
+            Debug.Log(Node.Value);
+            InOrderRecursive(Node.right);
+        }
+
+        public void PreOrder()
+        {
+            PreOrderRecursive(root);
+            //copiar o serializar arbol
+        }
+
+        private void PreOrderRecursive(Node<T> Node)
+        {
+            if (Node == null)
+            {
+                return;
+            }
+
+            Debug.Log(Node.Value);
+            PreOrderRecursive(Node.left);
+            PreOrderRecursive(Node.right);
+        }
+
+        public void PostOrder()
+        {
+            PostOrderRecursive(root);
+            //eliminar Nodes
+        }
+
+        private void PostOrderRecursive(Node<T> Node)
+        {
+            if (Node == null)
+            {
+                return;
+            }
+
+            PostOrderRecursive(Node.left);
+            PostOrderRecursive(Node.right);
+            Debug.Log(Node.Value);
+        }
+
+        public void LevelOrder(Node<T> current)
+        {
+            Queue<Node<T>> queue = new Queue<Node<T>>();
+            queue.Enqueue(current);
+
+            while (queue.Count > 0)
+            {
+                current = queue.Dequeue();
+                Debug.Log(current.Value.ToString());
+
+                if (current.left != null)
+                {
+                    queue.Enqueue(current.left);
+                }
+
+                if (current.right != null)
+                {
+                    queue.Enqueue(current.right);
+                }
+            }
         }
     }
 }

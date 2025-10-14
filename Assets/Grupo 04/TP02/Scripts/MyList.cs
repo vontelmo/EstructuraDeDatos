@@ -7,11 +7,11 @@ namespace MyLinkedList
     // Lista doblemente enlazada
     public class MyList<T>
     {
-        // Nodo inicial (root)
+        // Node inicial (root)
         private MyNode<T> root;
         public MyNode<T> Root { get; private set; }
 
-        // Nodo final (tail)
+        // Node final (tail)
         private MyNode<T> tail;
         public MyNode<T> Tail { get; private set; }
 
@@ -55,7 +55,7 @@ namespace MyLinkedList
             }
             else
             {
-                // Lista vacía: root y tail apuntan al nuevo nodo
+                // Lista vacía: root y tail apuntan al nuevo Node
                 root = newNode;
                 tail = newNode;
             }
@@ -99,24 +99,24 @@ namespace MyLinkedList
                 {
                     if (current == root && current == tail)
                     {
-                        // Único nodo en la lista
+                        // Único Node en la lista
                         root = tail = null;
                     }
                     else if (current == root)
                     {
-                        // Primer nodo
+                        // Primer Node
                         root = root.Next;
                         root.Prev = null;
                     }
                     else if (current == tail)
                     {
-                        // Último nodo
+                        // Último Node
                         tail = tail.Prev;
                         tail.Next = null;
                     }
                     else
                     {
-                        // Nodo intermedio
+                        // Node intermedio
                         current.Prev.Next = current.Next;
                         current.Next.Prev = current.Prev;
                     }
@@ -131,7 +131,7 @@ namespace MyLinkedList
             return false;
         }
 
-        // Elimina el nodo en un índice específico
+        // Elimina el Node en un índice específico
         public void RemoveAt(int index)
         {
             if (index < 0 || index >= Count)

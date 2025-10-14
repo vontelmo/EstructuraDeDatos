@@ -14,7 +14,7 @@ public class Foo2
 public class MiLista : IComparable<MiLista>
 {
     int score;
-    string name = " ";
+    //string name = " ";
 
     public int CompareTo(MiLista other)
     {
