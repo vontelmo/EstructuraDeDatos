@@ -66,6 +66,7 @@ public class TP02Execute : MonoBehaviour
         {
             Debug.LogWarning("Valor no valido");
         }
+
         DrawList();
 
     }
@@ -82,15 +83,27 @@ public class TP02Execute : MonoBehaviour
         DrawList();
     }
 
-
-    void Start()
+    public void SortByBubble()
     {
-        
+        BubbleSort.BubbleSorting(list);
+        DrawList();
+        Debug.Log("bubble " + list.ToString());
+
     }
 
-    void Update()
+    public void SortBySelection()
     {
-       
+        SelectionSort.SelectionSorting(list);
+        DrawList();
+        Debug.Log("selection " + list.ToString());
+
     }
 
+    public void SortByQuick()
+    {
+        QuickSort.QuickSorting(list);
+        DrawList();
+        Debug.Log("quick " + list.ToString());
+
+    }
 }

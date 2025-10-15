@@ -9,9 +9,11 @@ namespace MyLinkedList
     {
         // Nodo inicial (root)
         private MyNode<T> root;
+        public MyNode<T> Root { get; private set; }
 
         // Nodo final (tail)
         private MyNode<T> tail;
+        public MyNode<T> Tail { get; private set; }
 
         // Constructor
         public MyList()
@@ -213,6 +215,22 @@ namespace MyLinkedList
             }
 
             return sb.ToString();
+        }
+
+        public T[] ToArray()
+        {
+            // crea un nuevo array de tamaño count y solo toma los valores entre head y tail
+            T[] array = new T[Count];
+            MyNode<T> current = root;
+            int index = 0;
+
+            while (current != null)
+            {
+                array[index++] = current.Value;
+                current = current.Next;
+            }
+
+            return array;
         }
     }
 }
