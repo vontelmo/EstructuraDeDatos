@@ -68,7 +68,25 @@ namespace MyBST
         public void InOrder()
         {
             InOrderRecursive(root);
+            
             //obtener valores en ascendente
+        }
+
+        public List<T> InOrderList()
+        {
+            List<T> list = new List<T>();
+            InOrderListRecursive(root, list);
+            return list;
+            //obtener valores en ascendente
+        }
+
+        private void InOrderListRecursive(Node<T> node, List<T> list)
+        {
+            if (node == null) return;
+
+            InOrderListRecursive(node.right, list); // derecha primero (mayores)
+            list.Add(node.Value);
+            InOrderListRecursive(node.left, list); // luego izquierda (menores)
         }
 
         private void InOrderRecursive(Node<T> Nodo)

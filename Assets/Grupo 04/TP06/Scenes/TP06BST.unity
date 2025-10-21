@@ -250,8 +250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4020fb05857c24e8529f18432b36eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodePrefab: {fileID: 7167784996711084924, guid: a45d980d44446f04cb66d60ac18a3df0, type: 3}
-  linePrefab: {fileID: 8031839666614865057, guid: e7a0c5ec13d507242b21cc0594969a47, type: 3}
+  nodePrefab: {fileID: 3470742341863402660, guid: 10ebc2c905421fc43adbdc9cf394a657, type: 3}
+  linePrefab: {fileID: 5446929471280682971, guid: 24d7f6209962205488057ca4ad1f31c0, type: 3}
   treeContainer: {fileID: 1068816382}
   xSpacing: 100
   ySpacing: 60
@@ -439,8 +439,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 137.76}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -50, y: 195.39471}
+  m_SizeDelta: {x: 100, y: 59.1786}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1793909013
 GameObject:
@@ -543,10 +543,10 @@ RectTransform:
   - {fileID: 1068816382}
   m_Father: {fileID: 143978407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: -0.00022316}
-  m_SizeDelta: {x: 800, y: 375.53}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -0.50064087}
+  m_SizeDelta: {x: 0, y: -0.51000977}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1888280570
 MonoBehaviour:

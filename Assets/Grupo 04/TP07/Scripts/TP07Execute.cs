@@ -1,103 +1,84 @@
 using MyBST;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 public class TP07Execute : MonoBehaviour
 {
-    [SerializeField] private GameObject nodePrefab;
-    [SerializeField] private GameObject linePrefab;
-    [SerializeField] private RectTransform treeContainer;
-    [SerializeField] private float xSpacing = 200f;
-    [SerializeField] private float ySpacing = 120f;
+    private AVLTree<int> tree = new();
 
-    private AVLTree<int> tree;
+    [SerializeField] private TextAsset jsonName;
+
+    [SerializeField] private RectTransform contentHolder;
+
+    [SerializeField] private GameObject displayNamePrefab;
+
+    [SerializeField] TMP_InputField inputField;
+
+
+    private Dictionary<string, int> scoreDictionary = new Dictionary<string, int>();
+
+    [System.Serializable]
+    public class NamesList{public List<string> names;}
+
+    private List<string> names = new();
+
 
     private void Start()
     {
-        AVLTree<int> tree = new AVLTree<int>();
+        NamesList namesList = JsonUtility.FromJson<NamesList>(jsonName.text);
 
-        int[] myArray = { 20, 10, 1, 26, 35, 40, 18, 12 };
+        names = namesList.names;
 
-        foreach (var v in myArray)
+        Debug.Log(names.Count);
+     
+        foreach (string name in namesList.names)
         {
-            tree.Insert(v);
+            int randScore = Random.Range(100, 10000);
+            tree.Insert(randScore);
+
+            
         }
 
-        SetTree(tree);
-        Debug.Log(tree);
+        DrawLeaderboard();
 
-        Debug.Log(tree.Root == null);
-        Debug.Log("--------LEVEL ORDER--------");
-        tree.LevelOrder(tree.Root);
-        Debug.Log("--------POST ORDER--------");
-        tree.PostOrder();
     }
-
-    public void SetTree(AVLTree<int> avl)
+    private void DrawLeaderboard()
     {
-        tree = avl;
-        DrawTree();
-    }
-
-    public void DrawTree()
-    {
-        foreach (Transform child in treeContainer)
+        // Limpiar lo que haya antes
+        foreach (Transform child in contentHolder)
             Destroy(child.gameObject);
 
-        if (tree.Root != null)
-            DrawNode(tree.Root, 0, 0, treeContainer.rect.width / 2f);
-        if (tree.Root == null)
-            Debug.Log("nulllllll");
+        // Obtener lista ordenada del árbol
+        List<int> orderedScores = tree.InOrderList();
+
+        // Crear un item por cada puntaje
+        foreach (int score in orderedScores)
+        {
+            GameObject newItem = Instantiate(displayNamePrefab, contentHolder);
+            TMPro.TMP_Text text = newItem.GetComponentInChildren<TMPro.TMP_Text>();
+            text.text = score.ToString();
+        }
     }
 
-    private GameObject DrawNode(Node<int> node, int depth, float xOffset, float parentX)
+    public void InsertScore() 
     {
-        if (node == null) return null;
+        string inputText = inputField.text;
 
-        GameObject newNode = Instantiate(nodePrefab, treeContainer);
-        TMP_Text text = newNode.GetComponentInChildren<TMP_Text>();
-        text.text = node.Value.ToString();
-
-        // Posición
-        float xPos = parentX + xOffset;
-        float yPos = -depth * ySpacing;
-        RectTransform nodeRect = newNode.GetComponent<RectTransform>();
-        nodeRect.anchoredPosition = new Vector2(xPos, yPos);
-
-        float childOffset = Mathf.Max(60, xSpacing / (depth + 1));
-
-        if (node.left != null)
+        if (int.TryParse(inputText, out int value))
         {
-            GameObject leftChild = DrawNode(node.left, depth + 1, -childOffset, xPos);
-            DrawLine(nodeRect, leftChild.GetComponent<RectTransform>());
+            tree.Insert(value);
+            inputField.text = "";
+        }
+        else
+        {
+            Debug.Log("invalid dataa");
         }
 
-        if (node.right != null)
-        {
-            GameObject rightChild = DrawNode(node.right, depth + 1, childOffset, xPos);
-            DrawLine(nodeRect, rightChild.GetComponent<RectTransform>());
-        }
+        DrawLeaderboard(); 
 
-        return newNode;
-    }
-
-    private void DrawLine(RectTransform from, RectTransform to)
-    {
-        if (linePrefab == null) return;
-
-        GameObject line = Instantiate(linePrefab, treeContainer);
-        RectTransform rect = line.GetComponent<RectTransform>();
-
-        Vector2 start = from.anchoredPosition;
-        Vector2 end = to.anchoredPosition;
-        Vector2 direction = (end - start).normalized;
-
-        float distance = Vector2.Distance(start, end);
-
-        rect.sizeDelta = new Vector2(4, distance);
-        rect.anchoredPosition = start + (end - start) / 2f;
-        float angle = Mathf.Atan2(end.y - start.y, end.x - start.x) * Mathf.Rad2Deg;
-        rect.rotation = Quaternion.Euler(0, 0, angle - 90);
     }
 
 }
+

@@ -83,6 +83,8 @@ namespace MyBST
             GameObject line = Instantiate(linePrefab, treeContainer);
             RectTransform rect = line.GetComponent<RectTransform>();
 
+            line.transform.SetAsFirstSibling();
+
             Vector2 start = from.anchoredPosition;
             Vector2 end = to.anchoredPosition;
             Vector2 direction = (end - start).normalized;
