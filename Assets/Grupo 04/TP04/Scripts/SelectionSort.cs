@@ -13,19 +13,23 @@ public static class SelectionSort
         {
             int minIndex = i;
 
-            for (int j = 0; i + 1 < n - 1; j++)
+            for (int j = i + 1; j < n; j++) 
             {
-                if (list[j].CompareTo(list[minIndex]) > 0)
+                if (list[j].CompareTo(list[minIndex]) < 0) 
                 {
                     minIndex = j;
-                    // Intercambiar
-                    T temp = list[i];
-                    list[i] = list[minIndex];
-                    list[minIndex] = temp;
                 }
+            }
+
+            if (minIndex != i)
+            {
+                T temp = list[i];
+                list[i] = list[minIndex];
+                list[minIndex] = temp;
             }
         }
     }
+
 
     public static void SelectionSorting<T>(MyList<T> list) where T : IComparable<T>
     {

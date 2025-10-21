@@ -67,6 +67,7 @@ public class TP02Execute : MonoBehaviour
         {
             Debug.LogWarning("Valor no valido");
         }
+
         DrawList();
 
     }
