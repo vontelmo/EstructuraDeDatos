@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Rendering;
 
-public class SimpleList<T> : ISimpleList<T>
+public class SimpleList<T> : ISimpleList<T> , IEnumerable<T>
 {
     const int defaultSize = 4;
     private T[] array;
@@ -82,5 +82,18 @@ public class SimpleList<T> : ISimpleList<T>
             }
         }
         return false;
+    }
+
+    public IEnumerator<T> GetEnumerator()
+    {
+        for (int i = 0; i < array.Length; i++)
+        {
+            yield return array[i];
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
 }

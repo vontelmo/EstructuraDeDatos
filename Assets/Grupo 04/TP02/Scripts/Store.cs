@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿using NUnit.Framework.Interfaces;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,31 +22,57 @@ public class Store : MonoBehaviour
     // Diccionario de inventario del jugador
     private Dictionary<int, PlayerItem> playerInventory = new Dictionary<int, PlayerItem>();
 
+    private string currentOrder;
+
     private void Start()
     {
-        Item sword = new Item { ID = 1, name = "Sword", price = 200, quality = "Common", type = "Weapon", icon = Resources.Load<Sprite>("Sprites/Sword") };
-        Item potion = new Item { ID = 2, name = "Potion", price = 50, quality = "Common", type = "Consumable", icon = Resources.Load<Sprite>("Sprites/Potion") };
-        Item bow = new Item { ID = 3, name = "Bow", price = 100, quality = "Common", type = "Range Weapon", icon = Resources.Load<Sprite>("Sprites/Bow") };
+        Item[] items = Resources.LoadAll<Item>("ItemsFolder");
 
-
-        storeItems.Add(sword.ID, sword);
-        storeItems.Add(potion.ID, potion);
-        storeItems.Add(bow.ID, bow);
-
+        foreach (Item item in items)
+        {
+            storeItems.Add(item.ID, item);
+        }
 
         UpdateUI();
+        UpdateMoney();
     }
 
-    private void UpdateUI()
+    private void UpdateMoney()
+    {
+        moneyText.text = "Money: " + playerMoney;
+    }
+
+    private void UpdateUI(string orderBy = "ID")
     {
         foreach (Transform child in gridLayout)
         {
             Destroy(child.gameObject);
         }
 
-        moneyText.text = "Money: " + playerMoney;
 
-        foreach (KeyValuePair<int, Item> kvp in storeItems)
+        IEnumerable<KeyValuePair<int, Item>> items = storeItems;
+
+        switch (orderBy)
+        {
+            case "Price":
+                items = storeItems.OrderBy(kvp => kvp.Value.price);
+                break;
+            case "Quality":
+                items = storeItems.OrderBy(kvp => kvp.Value.quality);
+                break;
+            case "Name":
+                items = storeItems.OrderBy(kvp => kvp.Value.name);
+                break;
+            case "Type":
+                items = storeItems.OrderBy(kvp => kvp.Value.type);
+                break;
+            default:
+                items = storeItems.OrderBy(kvp => kvp.Value.ID);
+                break;
+        }
+
+
+        foreach (KeyValuePair<int, Item> kvp in items)
         {
             GameObject newItem = Instantiate(itemPrefab, gridLayout);
 
@@ -60,6 +89,8 @@ public class Store : MonoBehaviour
             int id = kvp.Key;
             btn.onClick.AddListener(() => BuyItem(id));
         }
+
+        currentOrder = orderBy;
     }
 
     private void BuyItem(int itemId)
@@ -72,22 +103,44 @@ public class Store : MonoBehaviour
             {
                 playerMoney -= item.price;
 
+                UpdatePrice(item.type);
+
                 if (playerInventory.ContainsKey(itemId))
                 {
-                    playerInventory[itemId].cantidad++;
+                    playerInventory[itemId].quantity++;
                 }
                 else
                 {
                     playerInventory.Add(itemId, new PlayerItem(item));
                 }
-                UpdateUI();
+                UpdateMoney();
                 UpdateHotbar();
             }
             else
             {
                 Debug.Log("no money");
             }
+
+            PlayerPrefs.SetInt($" {playerInventory[itemId]}Quantity ", playerInventory[itemId].quantity);
         }
+    }
+
+
+    private void UpdatePrice(ItemsType itemsType)
+    {
+        foreach (KeyValuePair<int, Item> i in storeItems)
+        {
+            if (i.Value.type != itemsType)
+            {
+                i.Value.ChangePrice(-5);
+            }
+            else if (i.Value.type == itemsType)
+            {
+                i.Value.ChangePrice(5);
+            }
+
+        }
+        UpdateUI(currentOrder);
     }
 
     private void UpdateHotbar()
@@ -105,7 +158,7 @@ public class Store : MonoBehaviour
             Image icon = newItem.GetComponentInChildren<Image>();
 
             texts[0].text = kvp.Value.item.name;
-            texts[1].text = kvp.Value.cantidad.ToString();
+            texts[1].text = PlayerPrefs.GetInt($" {kvp.Value.item.ID}Quantity ", 1).ToString();
 
             if (icon != null && kvp.Value.item.icon != null)
             {
@@ -120,18 +173,40 @@ public class Store : MonoBehaviour
 
     private void SellItem(int itemId)
     {
-        if (playerInventory.ContainsKey(itemId)) 
+        if (playerInventory.ContainsKey(itemId))
         {
-            playerInventory[itemId].cantidad--;
+            playerInventory[itemId].quantity--;
             playerMoney += playerInventory[itemId].item.price;
         }
-        if (playerInventory[itemId].cantidad < 1) 
+        if (playerInventory[itemId].quantity < 1)
         {
             playerInventory.Remove(itemId);
         }
 
-        UpdateUI();
+        UpdateMoney();
         UpdateHotbar();
+    }
+
+
+
+    public void OrderByPrice()
+    {
+        UpdateUI("Price");
+    }
+
+    public void OrderByQuality()
+    {
+        UpdateUI("Quality");
+    }
+
+    public void OrderByName()
+    {
+        UpdateUI("Name");
+    }
+
+    public void OrderByType()
+    {
+        UpdateUI("Type");
     }
 
 }

@@ -1,6 +1,9 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
-public abstract class MySet<T>
+public abstract class MySet<T> : IEnumerable<T>
 {
     public abstract T[] Elements { get; }
 
@@ -39,4 +42,17 @@ public abstract class MySet<T>
     public abstract void Intersect(MySet<T> element1, MySet<T> element2);
 
     public abstract void Difference(MySet<T> element1, MySet<T> element2);
+
+    public IEnumerator<T> GetEnumerator()
+    {
+        for (int i = 0; i < Elements.Length; i++)
+        {
+            yield return Elements[i];
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }

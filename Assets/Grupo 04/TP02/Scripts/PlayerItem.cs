@@ -6,13 +6,12 @@ using UnityEngine;
 public class PlayerItem
 {
     public Item item;
-    public int cantidad;
+    public int quantity;
 
     public PlayerItem(Item i, int cantidadInicial = 1)
     {
         item = i;
-        cantidad = cantidadInicial;
+        quantity = cantidadInicial;
     }
 }
-
 

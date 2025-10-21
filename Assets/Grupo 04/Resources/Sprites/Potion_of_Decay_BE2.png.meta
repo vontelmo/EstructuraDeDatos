@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8fb12089fffdd56489c4a5f7ab45526d
+guid: d59c5251e0b43ef4c928a596a9cf846b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6231044458718751821
-    second: circle_0
+      213: 5049705541492828454
+    second: Potion_of_Decay_BE2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: circle_0
+      name: Potion_of_Decay_BE2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 500
-        height: 500
+        x: 39
+        y: 9
+        width: 92
+        height: 132
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3b3176a0412e689a0800000000000000
-      internalID: -6231044458718751821
+      spriteID: 629600d7f68241640800000000000000
+      internalID: 5049705541492828454
       vertices: []
       indices: 
       edges: []
@@ -131,7 +131,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      circle_0: -6231044458718751821
+      Potion_of_Decay_BE2_0: 5049705541492828454
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
