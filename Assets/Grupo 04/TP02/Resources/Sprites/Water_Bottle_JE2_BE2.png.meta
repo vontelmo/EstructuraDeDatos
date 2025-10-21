@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 818590537b03c6642b5078c0b1a96c6a
+guid: 7c1f34fd8f541f64cbdbc911add54bd8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2683089043320565103
-    second: Insecto_soleador_sombra_ver_0
+      213: 4632984671061331808
+    second: Water_Bottle_JE2_BE2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Insecto_soleador_sombra_ver_0
+      name: Water_Bottle_JE2_BE2_0
       rect:
         serializedVersion: 2
-        x: 57
-        y: 13
-        width: 581
-        height: 732
+        x: 39
+        y: 9
+        width: 92
+        height: 132
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f6d6ddfe44f3c3520800000000000000
-      internalID: 2683089043320565103
+      spriteID: 06fc070030bab4040800000000000000
+      internalID: 4632984671061331808
       vertices: []
       indices: 
       edges: []
@@ -130,8 +130,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Insecto_soleador_sombra_ver_0: 2683089043320565103
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

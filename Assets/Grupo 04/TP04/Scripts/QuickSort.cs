@@ -80,7 +80,7 @@ public static class QuickSort
             if (j.Value.CompareTo(pivotValue) <= 0)
             {
                 i = (i == null) ? low : i.Next;
-                // Swap values
+                // Swap
                 T temp = i.Value;
                 i.Value = j.Value;
                 j.Value = temp;
@@ -89,11 +89,11 @@ public static class QuickSort
 
         i = (i == null) ? low : i.Next; // Operador ternario if (true : false)
 
-        // Swap pivot value to its correct position
+        // Swap
         T tempPivot = i.Value;
         i.Value = high.Value;
         high.Value = tempPivot;
 
-        return i; // Return the pivot node
+        return i; // regresa el nodo puntero
     }
 }

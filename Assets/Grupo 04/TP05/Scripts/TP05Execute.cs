@@ -5,6 +5,7 @@ using TMPro;
 using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEditor.Rendering.CameraUI;
 
 
 public class TP05Execute : MonoBehaviour
@@ -15,13 +16,13 @@ public class TP05Execute : MonoBehaviour
     [SerializeField] GameObject listSquare;
     [SerializeField] Transform gridLayout;
     [SerializeField] TMP_InputField inputField;
-    [SerializeField] private TMP_Dropdown typeDropdown;
+    string input;
+    int value;
+    string result;
 
-    private Type currentType = typeof(int);
 
     void Start()
     {
-        typeDropdown.onValueChanged.AddListener(OnTypeChanged);
     }
 
     void DrawResult()
@@ -35,111 +36,66 @@ public class TP05Execute : MonoBehaviour
         TMP_Text childText = newItem.GetComponentInChildren<TMP_Text>();
         if (childText != null)
         {
-            if (childText.text == default) return;
-
-
+            childText.text = result;
         }
 
     }
 
 
 
-    void OnTypeChanged(int index)
-    {
-        switch (index)
-        {
-            case 0: currentType = typeof(int); break;
-            case 1: currentType = typeof(float); break;
-            case 2: currentType = typeof(string); break;
-        }
-    }
 
     public void FactorialButton()
     {
-        object input = inputField.text;
-        try
-        {
-            object value = Convert.ChangeType(input, currentType);
-            value = factorial.GetFactorial((int)value);
-            Debug.Log(value);
-            DrawResult();
-        }
-        catch
-        {
-            Debug.Log($"El valor '{input}' no es valido para {currentType.Name}");
-        }
+        input = inputField.text;
+        int.TryParse(input, out value);
+
+        result = factorial.GetFactorial(value).ToString();
+        DrawResult();
+
     }
 
 
     public void FibonacciButton()
     {
-        object input = inputField.text;
-        try
-        {
-            object value = Convert.ChangeType(input, currentType);
-            value = Fibonacci.GetFibonacciSeries((int)value);
-            Debug.Log(value);
-            DrawResult();
-        }
-        catch
-        {
-            Debug.Log($"El valor '{input}' no es valido para {currentType.Name}");
-        }
+        input = inputField.text;
+        int.TryParse(input, out value);
+
+        result = Fibonacci.GetFibonacciSeries(value).ToString();
+
+        DrawResult();
+
     }
 
     public void PalindromButton()
     {
-        object input = inputField.text;
-        try
-        {
-            object value = Convert.ChangeType(input, currentType);
-            value = Palindromo.IsPalindrom(value.ToString());
-            Debug.Log(input);
-            DrawResult();
+        input = inputField.text;
 
-        }
-        catch
-        {
-            Debug.Log($"El valor '{input}' no es valido para {currentType.Name}");
-        }
+        result = input + Palindromo.IsPalindrom(input).ToString();
+        DrawResult();
     }
 
     public void PreviousNumSumButton()
     {
-        object input = inputField.text;
-        try
-        {
-            object value = Convert.ChangeType(input, currentType);
-            value = PreviousNumSum.SumAllPreviousNum((int)value);
-            Debug.Log(value);
-            DrawResult();
-        }
-        catch
-        {
-            Debug.Log($"El valor '{input}' no es valido para {currentType.Name}");
-        }
+        input = inputField.text;
+        int.TryParse(input, out value);
+
+        result = PreviousNumSum.SumAllPreviousNum(value).ToString();
+
+        DrawResult();
+
     }
 
-    public TMP_Text text;
 
     public void PyramidButton()
     {
-        string input = inputField.text;
-        
-        if (int.TryParse(input, out int inputInt))
-        {
-            string output = pyramid.CreateRecursive(inputInt);
-            text.text = output;
-            Debug.Log(output);
-        }
+        input = inputField.text;
+        int.TryParse(input, out value);
 
-        try
-        {
-        }
-        catch
-        {
-            Debug.Log($"El valor '{input}' no es valido para {currentType.Name}");
-        }
+
+        result = pyramid.CreateRecursive(value);
+        DrawResult();
+
+
     }
 
 }

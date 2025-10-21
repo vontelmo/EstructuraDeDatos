@@ -1,33 +1,8 @@
 using System;
 using MyLinkedList;
+using UnityEngine;
 
-public class Foo2
-{
-    SimpleList<MiLista> list = new SimpleList<MiLista>();
-
-    void Func()
-    {
-        BubbleSort.BubbleSorting<MiLista>(list);
-    }
-}
-
-public class MiLista : IComparable<MiLista>
-{
-    int score;
-    string name = " ";
-
-    public int CompareTo(MiLista other)
-    {
-        if (score > other.score)
-            return 1;
-        else if (score > other.score)
-            return -1;
-
-        return 0;
-    }
-}
-
-public static class BubbleSort
+public class BubbleSort : MonoBehaviour
 {
     public static void BubbleSorting<T>(SimpleList<T> list) where T : IComparable<T>
     {
@@ -48,10 +23,13 @@ public static class BubbleSort
         }
     }
 
-    public static void BubbleSorting<T>(MyList<T> list) where T : IComparable<T>
+    public static void BubbleSortingMyList<T>(MyList<T> list) where T : IComparable<T>
     {
-        if (list.Tail == null || list.Tail.Next == null)
+        Debug.Log("Ordenando con BubbleSorting MyList");
+
+        if (list.Count <= 1)
         {
+            Debug.Log("Lista vacía o con un solo elemento.");
             return;
         }
 
@@ -62,23 +40,37 @@ public static class BubbleSort
         do
         {
             swapped = false;
-            current = list.Tail;
+            current = list.Root; // comienza desde el principio de la lista
             MyNode<T> prev = null;
 
-            while (current.Next != lastSorted)
+            Debug.Log("Valor de list.Count: " + list.Count);
+            Debug.Log("Valor de list.Root: " + (list.Root != null ? list.Root.Value.ToString() : "null"));
+            Debug.Log("Valor de list.Root.Next: " + (list.Root?.Next != null ? list.Root.Next.Value.ToString() : "null"));
+
+            // recorre la lista hasta el nodo previo al ultimo nodo ordenado
+            while (current != null && current.Next != lastSorted)
             {
+                Debug.Log($"Tipo de current.Value: {current.Value.GetType()}");
+
                 if (current.Value.CompareTo(current.Next.Value) > 0)
                 {
+                    Debug.Log($"Intercambiando: {current.Value} > {current.Next.Value}");
+
                     // Swap data values
                     T temp = current.Value;
                     current.Value = current.Next.Value;
                     current.Next.Value = temp;
+
                     swapped = true;
                 }
+
                 prev = current;
                 current = current.Next;
             }
-            lastSorted = current; // Mark the current end as sorted
+            lastSorted = current;
+
         } while (swapped);
+
+        Debug.Log("Lista después de ordenar: " + list.ToString());
     }
 }

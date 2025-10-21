@@ -30,7 +30,7 @@ public class MyQueue<T>
         }
 
         queueArray[tail] = item; // agrega item al tail del array
-        tail = (tail + 1) % queueArray.Length; // mueve el puntero tail de posicion de forma circular dentro de los limites del array
+        tail = (tail + 1) % queueArray.Length; // mueve el puntero tail de posicion dentro de los limites del array por el modulo
         Count++;
     }
 
@@ -81,7 +81,7 @@ public class MyQueue<T>
 
         for (int i = 0; i < Count; i++)
         {
-            items[i] = queueArray[i];        
+            items[i] = queueArray[(head + i) % queueArray.Length];
         }
 
         return items; // regresa un array

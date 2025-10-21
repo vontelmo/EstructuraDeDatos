@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 818590537b03c6642b5078c0b1a96c6a
+guid: dbffa29fbf915dd4c983e97dbf7fcea5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2683089043320565103
-    second: Insecto_soleador_sombra_ver_0
+      213: -2994859241451027625
+    second: Netherite_Sword_JE2_BE2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Insecto_soleador_sombra_ver_0
+      name: Netherite_Sword_JE2_BE2_0
       rect:
         serializedVersion: 2
-        x: 57
-        y: 13
-        width: 581
-        height: 732
+        x: 0
+        y: 0
+        width: 160
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f6d6ddfe44f3c3520800000000000000
-      internalID: 2683089043320565103
+      spriteID: 7530409236f1076d0800000000000000
+      internalID: -2994859241451027625
       vertices: []
       indices: 
       edges: []
@@ -130,8 +130,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Insecto_soleador_sombra_ver_0: 2683089043320565103
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

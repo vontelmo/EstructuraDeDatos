@@ -6,6 +6,34 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Grupo 04/MainMenu/MainMenu.unity
+    guid: b0cfe7276e93aa141b7bdf4707336153
+  - enabled: 1
+    path: Assets/Grupo 04/TP01/Scenes/Ejercicio 1.unity
+    guid: c67c0c27d6a50ac449ac29bbb11eb41e
+  - enabled: 1
+    path: Assets/Grupo 04/TP02/Scenes/TP 2 Ejercicio 1.unity
+    guid: 4ec779d607d538340b9076ff62419301
+  - enabled: 1
+    path: Assets/Grupo 04/TP02/Scenes/TP 2 Ejercicio 2.unity
+    guid: aebc31a69e6ca2b4da3b4f28b6521ad9
+  - enabled: 1
+    path: Assets/Grupo 04/TP03/Scenes/TP 3 Ejercicio 1 Stack LIFO.unity
+    guid: 4096b370e267e9344a052f280729dd1a
+  - enabled: 1
+    path: Assets/Grupo 04/TP03/Scenes/TP 3 Ejercicio Queue FIFO.unity
+    guid: 26aa0d88004035145b8ea5b0d7d44c9d
+  - enabled: 1
+    path: Assets/Grupo 04/TP03/Scenes/TP 3 Ejercicio Queue Shadow.unity
+    guid: 71d61139c637dd54a9ea4fc091505700
+  - enabled: 1
+    path: Assets/Grupo 04/TP03/Scenes/TP 3 Ejercicio Undo.unity
+    guid: 29402daa65f9f3e49a0ad0cd6699f27f
+  - enabled: 1
+    path: Assets/Grupo 04/TP04/Scenes/TP04.unity
+    guid: 17cc8f3c83063bf4695c9d09f21155ae
+  - enabled: 1
+    path: Assets/Grupo 04/TP05/Scenes/TP05.unity
+    guid: a79a00a42d827164aba0af6e46f606e7
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
