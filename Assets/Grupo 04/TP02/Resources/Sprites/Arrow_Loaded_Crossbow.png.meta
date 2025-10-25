@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Arrow_Loaded_Crossbow_0: -7378669428423714836
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

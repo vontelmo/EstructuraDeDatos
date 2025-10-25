@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      500px-Circle_-_black_simple.svg_0: 5313250377565713651
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,3 +1,4 @@
+using MyBST;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 public class TP06Execute : MonoBehaviour
 {
-    [SerializeField] private GameObject nodePrefab;
+    [SerializeField] private GameObject NodePrefab;
     [SerializeField] private GameObject linePrefab;
     [SerializeField] private RectTransform treeContainer;
     [SerializeField] private float xSpacing = 200f;
@@ -25,7 +26,6 @@ public class TP06Execute : MonoBehaviour
         }
 
         SetTree(tree);
-        Debug.Log(tree);
     }
 
     public void SetTree(BST<int> bst)
@@ -45,32 +45,32 @@ public class TP06Execute : MonoBehaviour
             Debug.Log("nulllllll");
     }
 
-    private GameObject DrawNode(Nodo<int> node, int depth, float xOffset, float parentX)
+    private GameObject DrawNode(Node<int> Node, int depth, float xOffset, float parentX)
     {
-        if (node == null) return null;
+        if (Node == null) return null;
 
-        GameObject newNode = Instantiate(nodePrefab, treeContainer);
+        GameObject newNode = Instantiate(NodePrefab, treeContainer);
         TMP_Text text = newNode.GetComponentInChildren<TMP_Text>();
-        text.text = node.datos.ToString();
+        text.text = Node.Value.ToString();
 
         // Posición
         float xPos = parentX + xOffset;
         float yPos = -depth * ySpacing;
-        RectTransform nodeRect = newNode.GetComponent<RectTransform>();
-        nodeRect.anchoredPosition = new Vector2(xPos, yPos);
+        RectTransform NodeRect = newNode.GetComponent<RectTransform>();
+        NodeRect.anchoredPosition = new Vector2(xPos, yPos);
 
         float childOffset = Mathf.Max(60, xSpacing / (depth + 1));
 
-        if (node.izq != null)
+        if (Node.left != null)
         {
-            GameObject leftChild = DrawNode(node.izq, depth + 1, -childOffset, xPos);
-            DrawLine(nodeRect, leftChild.GetComponent<RectTransform>());
+            GameObject leftChild = DrawNode(Node.left, depth + 1, -childOffset, xPos);
+            DrawLine(NodeRect, leftChild.GetComponent<RectTransform>());
         }
 
-        if (node.der != null)
+        if (Node.right != null)
         {
-            GameObject rightChild = DrawNode(node.der, depth + 1, childOffset, xPos);
-            DrawLine(nodeRect, rightChild.GetComponent<RectTransform>());
+            GameObject rightChild = DrawNode(Node.right, depth + 1, childOffset, xPos);
+            DrawLine(NodeRect, rightChild.GetComponent<RectTransform>());
         }
 
         return newNode;
@@ -89,7 +89,7 @@ public class TP06Execute : MonoBehaviour
 
         float distance = Vector2.Distance(start, end);
 
-        rect.sizeDelta = new Vector2(4, distance); 
+        rect.sizeDelta = new Vector2(4, distance);
         rect.anchoredPosition = start + (end - start) / 2f;
         float angle = Mathf.Atan2(end.y - start.y, end.x - start.x) * Mathf.Rad2Deg;
         rect.rotation = Quaternion.Euler(0, 0, angle - 90);

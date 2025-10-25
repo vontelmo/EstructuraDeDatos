@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Water_Bottle_JE2_BE2_0: 4632984671061331808
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

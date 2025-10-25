@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Enchanted_Turtle_Shell_29_0: -2717859507053119541
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

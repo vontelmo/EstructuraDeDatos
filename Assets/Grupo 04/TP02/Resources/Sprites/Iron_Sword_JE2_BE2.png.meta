@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Iron_Sword_JE2_BE2_0: -6980646739523560042
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

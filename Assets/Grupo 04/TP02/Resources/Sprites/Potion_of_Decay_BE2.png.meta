@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Potion_of_Decay_BE2_0: 5049705541492828454
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

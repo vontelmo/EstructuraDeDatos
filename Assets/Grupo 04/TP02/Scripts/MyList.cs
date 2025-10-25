@@ -9,11 +9,11 @@ namespace MyLinkedList
     {
         // Nodo inicial (root)
         private MyNode<T> root;
-        public MyNode<T> Root { get => root; private set => root = value; }
+        public MyNode<T> Root { get; private set; }
 
         // Nodo final (tail)
         private MyNode<T> tail;
-        public MyNode<T> Tail { get => tail; private set=> tail = value; }
+        public MyNode<T> Tail { get; private set; }
 
         // Constructor
         public MyList()
@@ -60,8 +60,6 @@ namespace MyLinkedList
                 tail = newNode;
             }
 
-            Root = root;
-            Tail = tail;
             Count++;
         }
 
@@ -123,8 +121,6 @@ namespace MyLinkedList
                         current.Next.Prev = current.Prev;
                     }
 
-                    Root = root;
-                    Tail = tail;
                     Count--;
                     return true;
                 }
@@ -190,8 +186,6 @@ namespace MyLinkedList
                 current.Prev = newNode;
             }
 
-            Root = root;
-            Tail = tail;
             Count++;
         }
 
@@ -204,9 +198,6 @@ namespace MyLinkedList
             root = null;
             tail = null;
             Count = 0;
-
-            Root = null;
-            Tail = null;
         }
 
         // Devuelve la lista como string, mostrando los enlaces
@@ -224,6 +215,22 @@ namespace MyLinkedList
             }
 
             return sb.ToString();
+        }
+
+        public T[] ToArray()
+        {
+            // crea un nuevo array de tamaño count y solo toma los valores entre head y tail
+            T[] array = new T[Count];
+            MyNode<T> current = root;
+            int index = 0;
+
+            while (current != null)
+            {
+                array[index++] = current.Value;
+                current = current.Next;
+            }
+
+            return array;
         }
     }
 }

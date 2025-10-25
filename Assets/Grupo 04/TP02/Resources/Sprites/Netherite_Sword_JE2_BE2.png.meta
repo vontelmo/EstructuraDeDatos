@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Netherite_Sword_JE2_BE2_0: -2994859241451027625
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

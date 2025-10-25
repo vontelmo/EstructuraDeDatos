@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Nodo<T>
+public class Node<T>
 {
-    public T datos;
-    public Nodo<T> izq, der;
+    public T Value;
+    public Node<T> left, right;
 
-    public Nodo(T datos)
+    public Node(T datos)
     {
-        this.datos = datos;
-        izq = null;
-        der = null;
+        this.Value = datos;
+        left = null;
+        right = null;
     }
-    public Nodo(T datos, Nodo<T> izq, Nodo<T> der)
+    public Node(T datos, Node<T> izq, Node<T> der)
     {
-        this.datos = datos;
-        this.izq = izq;
-        this.der = der;
+        this.Value = datos;
+        this.left = izq;
+        this.right = der;
     }
 }
