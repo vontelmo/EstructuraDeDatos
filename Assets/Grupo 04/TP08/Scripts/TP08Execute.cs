@@ -69,11 +69,24 @@ public class TP08Execute : MonoBehaviour
 
     private string GenerateRandomName(int length)
     {
-        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        string[] names = new string[]
+        {
+        "KARNO", "VELTA", "SIRAN", "DOLME", "FARON", "MERIX", "TALEN", "JORAX", "NELVA", "BIRAN",
+        "LORAX", "FERON", "GALDA", "TIRAN", "MORIX", "CERAN", "DALVO", "XERON", "PAVEN", "NORIX",
+        "VELON", "HARIX", "SOMEN", "DERAX", "LIRAN", "TORIX", "KARIX", "VERON", "NALVO", "MIRAN",
+        "BORIX", "TERAN", "JARIX", "YERON", "PALIX", "MORAN", "XELTA", "DARIX", "NELON", "FERIX",
+        "SOLAN", "MERAN", "GARIX", "VORAN", "KELON", "HIRAX", "TALIX", "NIRAN", "PELON", "JORIN",
+        "DARON", "LERIX", "ZALEN", "PORAN", "MERIX", "VALON", "SORIN", "WORAN", "KIRAN", "TERIX",
+        "LARON", "XARIX", "NELIX", "VIRAN", "QARON", "ZERIX", "TORAN", "MELIX", "SARON", "JIRAX",
+        "RALON", "LERAN", "KORIX", "NERAN", "FIRAN", "WALIX", "YARON", "QIRAN", "MIRIX", "TARON",
+        "BELIX", "CARON", "DORIX", "FERAX", "HARON", "JORAX", "LERIX", "MORAX", "NORAN", "PERIX",
+        "QORAN", "RARIX", "SERAN", "TARIX", "VERAN", "XARON", "YERIX", "ZORAN", "KERIX", "LORIN"
+        };
         string result = "";
+
         for (int i = 0; i < length; i++)
         {
-            result += chars[Random.Range(0, chars.Length)];
+            result += names[Random.Range(0, names.Length)];
         }
         return result;
     }

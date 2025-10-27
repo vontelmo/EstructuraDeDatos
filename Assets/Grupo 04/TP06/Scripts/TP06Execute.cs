@@ -81,6 +81,8 @@ public class TP06Execute : MonoBehaviour
         if (linePrefab == null) return;
 
         GameObject line = Instantiate(linePrefab, treeContainer);
+        line.transform.SetAsFirstSibling();
+
         RectTransform rect = line.GetComponent<RectTransform>();
 
         Vector2 start = from.anchoredPosition;

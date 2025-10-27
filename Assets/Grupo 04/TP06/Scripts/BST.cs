@@ -72,15 +72,15 @@ namespace MyBST
             //obtener valores en ascendente
         }
 
-        public List<T> InOrderList()
+        public SimpleList<T> InOrderList()
         {
-            List<T> list = new List<T>();
+            SimpleList<T> list = new SimpleList<T>();
             InOrderListRecursive(root, list);
             return list;
             //obtener valores en ascendente
         }
 
-        private void InOrderListRecursive(Node<T> node, List<T> list)
+        private void InOrderListRecursive(Node<T> node, SimpleList<T> list)
         {
             if (node == null) return;
 

@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4020fb05857c24e8529f18432b36eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodePrefab: {fileID: 7167784996711084924, guid: a45d980d44446f04cb66d60ac18a3df0, type: 3}
+  NodePrefab: {fileID: 7167784996711084924, guid: a45d980d44446f04cb66d60ac18a3df0, type: 3}
   linePrefab: {fileID: 8031839666614865057, guid: e7a0c5ec13d507242b21cc0594969a47, type: 3}
   treeContainer: {fileID: 1068816382}
   xSpacing: 100
@@ -439,8 +439,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 218}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -25, y: 196.47}
+  m_SizeDelta: {x: 50, y: 56.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1793909013
 GameObject:
