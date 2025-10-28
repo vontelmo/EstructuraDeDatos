@@ -1,14 +1,19 @@
+using NUnit.Framework.Interfaces;
 using System.Collections.Generic;
 
 public class MyALGraph<T>
 {
-    private Dictionary<T, List<(T, int)>> nodesList;
+    private Dictionary<T, List<(T, int)>> nodesList = new();
 
-    public IEnumerable<T> Vertices { get; }
+    public Dictionary<T, List<(T, int)>> NodeList => nodesList;
+
+    private IEnumerable<T> vertexs => nodesList.Keys;
+
+    public IEnumerable<T> Vertexs => vertexs;
 
     public void AddVertex(T vertex)
     {
-        nodesList.TryAdd(vertex, new List<(T, int)>());
+        nodesList.Add(vertex, new List<(T, int)>());
     }
 
     public void RemoveVertex(T vertex)

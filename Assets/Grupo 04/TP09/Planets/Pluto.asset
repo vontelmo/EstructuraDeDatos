@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b6317868c3f8e4580a04b8b747a9b6, type: 3}
+  m_Name: Pluto
+  m_EditorClassIdentifier: 
+  Image: {fileID: -608637184145804773, guid: cc1e09e4296804e49be323c9129027f9, type: 3}
+  PlanetName: 0
