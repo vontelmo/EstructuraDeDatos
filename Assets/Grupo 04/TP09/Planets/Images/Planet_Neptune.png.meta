@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Planet_Neptune_0: 7513349368912113796
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Planet_Mercury_0: -5764940269150860059
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

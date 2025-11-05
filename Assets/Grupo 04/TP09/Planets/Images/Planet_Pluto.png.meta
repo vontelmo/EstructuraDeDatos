@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Planet_Pluto_0: -608637184145804773
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

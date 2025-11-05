@@ -1,18 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
-
-
+using TMPro;
 
 public class TP09Execute : MonoBehaviour
 {
 
-    private MyALGraph<Planet> planetGraph = new MyALGraph<Planet>();
+    private MyALGraph<Planet> planetGraph = new MyALGraph<Planet>(true);
 
     [SerializeField] private Planet[] planetList;
 
@@ -30,7 +25,7 @@ public class TP09Execute : MonoBehaviour
     List<string> completedList = new List<string>();
     private List<Planet> selectedPath = new List<Planet>();
 
-
+    private int? totalCost = 0;
 
     private void Start()
     {
@@ -44,7 +39,6 @@ public class TP09Execute : MonoBehaviour
             TMP_Text text = completedGraph.GetComponentInChildren<TMP_Text>();
             text.text += s + "\n";
         }
-
     }
 
     public void CreateStartButtons()
@@ -74,8 +68,6 @@ public class TP09Execute : MonoBehaviour
 
         hotbarBtn.onClick.AddListener(() => OnHotbarBtnClicked(newHotbarButton, btn, capturedPlanet));
 
-
-
         Debug.Log("added : " + capturedPlanet.name + " " + selectedPath.Count);
     }
 
@@ -101,6 +93,8 @@ public class TP09Execute : MonoBehaviour
             Planet current = selectedPath[i];
             Planet next = selectedPath[i + 1];
 
+            totalCost += planetGraph.GetWeight(current, next);
+
             if (!planetGraph.ContainsEdge(current, next))
             {
                 validPath = false;
@@ -109,7 +103,9 @@ public class TP09Execute : MonoBehaviour
             }
         }
         if (validPath)
-            textResult.text = "Valid Path :D";
+            textResult.text = "Valid Path :D" + " Total Cost: " + totalCost;
+        
+        totalCost = 0;
 
     }
 
@@ -117,17 +113,17 @@ public class TP09Execute : MonoBehaviour
     {
         
         GraphSpreadSheet.SetActive(!GraphSpreadSheet.activeSelf);
-
     }
 
-    public void ClearPath()
-    {
-        selectedPath.Clear();
+    //public void ClearPath()
+    //{
+    //    selectedPath.Clear();
 
-        foreach (Transform child in hotbarPlanetGrid)
-            Destroy(child.gameObject);
-
-    }
+    //    foreach (Transform child in hotbarPlanetGrid) 
+    //    {
+    //        Destroy(child.gameObject);
+    //    }
+    //}
 
 
     private List<string> CreateGraphList(Planet[] planetCollection)
@@ -140,6 +136,7 @@ public class TP09Execute : MonoBehaviour
             for (int i = 0; i < list.Count; i++) 
             {
                 graphList.Add(list[i].Item1.ToString() + " " + list[i].Item2 + " : " + planet.name);
+                
             }
 
         }

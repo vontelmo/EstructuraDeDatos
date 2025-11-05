@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Planet_Ceres_0: 2477293011439633023
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

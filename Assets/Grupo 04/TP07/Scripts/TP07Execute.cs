@@ -33,23 +33,30 @@ public class TP07Execute : MonoBehaviour
 
     SimpleList<int> orderedScores = new SimpleList<int>();
 
-    private Dictionary<string, int> scoreDictionary = new Dictionary<string, int>();
+    //private Dictionary<string, int> scoreDictionary = new Dictionary<string, int>();
+
+    SimpleList<string> leaderBoard = new();
+
 
     private void Start()
     {
+
         for (int i = 0; i < names.Count ; i++)
         {
             int randScore = Random.Range(100, 10000);
             tree.Insert(randScore);
         }
+
         orderedScores = tree.InOrderList();
+
         //Debug.Log(names.Count + " " + orderedScores.Count.ToString());
 
         for (int i = 0; i <100; i++)
         {
             string name = names[Random.Range(0, names.Count)];
 
-            scoreDictionary.Add(name, orderedScores[i]);
+            leaderBoard.Add($"{name} : {orderedScores[i]}");
+            //scoreDictionary.Add(name, orderedScores[i]);
             names.Remove(name);
         }
 
@@ -62,12 +69,15 @@ public class TP07Execute : MonoBehaviour
         foreach (Transform child in contentHolder)
             Destroy(child.gameObject);
 
-        foreach (int value in scoreDictionary.Values)
+        int count = 0;
+
+        foreach (int value in orderedScores)
         {
             GameObject newItem = Instantiate(displayNamePrefab, contentHolder);
-            TMPro.TMP_Text text = newItem.GetComponentInChildren<TMPro.TMP_Text>();
+            TMP_Text text = newItem.GetComponentInChildren<TMP_Text>();
 
-            text.text = scoreDictionary.FirstOrDefault(v => v.Value == value).Key + ": " + value.ToString();
+            text.text = leaderBoard[count];
+            count++;
         }
     }
 
@@ -78,9 +88,15 @@ public class TP07Execute : MonoBehaviour
         if (int.TryParse(inputText, out int value))
         {
             tree.Insert(value);
+
+            orderedScores = tree.InOrderList();
+
             string lastName = "PLAYER" + counter;
-            scoreDictionary.Add(lastName, value);
-            //ordenar diccionarioa sjdlknald nñsdjadñ
+
+            leaderBoard.Add($"{lastName} : {value}");
+            
+            //scoreDictionary.Add(lastName, value);
+
             inputField.text = "";
             
         }

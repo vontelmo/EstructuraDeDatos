@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Planet_Eris_0: -3720683753645229734
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

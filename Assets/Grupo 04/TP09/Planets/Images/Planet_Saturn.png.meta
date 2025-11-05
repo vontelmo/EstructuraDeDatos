@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Planet_Saturn_0: 3333190409342795904
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

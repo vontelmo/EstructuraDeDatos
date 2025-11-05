@@ -1,15 +1,22 @@
-using NUnit.Framework.Interfaces;
+using System;
 using System.Collections.Generic;
 
-public class MyALGraph<T>
+public class MyALGraph<T> where T : IEquatable<T>
 {
     private Dictionary<T, List<(T, int)>> nodesList = new();
 
     public Dictionary<T, List<(T, int)>> NodeList => nodesList;
 
-    private IEnumerable<T> vertexs => nodesList.Keys;
+    private IEnumerable<T> vertices => nodesList.Keys;
 
-    public IEnumerable<T> Vertexs => vertexs;
+    public IEnumerable<T> Vertices => vertices;
+
+    public bool IsDirectional { get; private set; } = true;
+
+    public MyALGraph(bool isDirectional)
+    {
+        IsDirectional = isDirectional;
+    }
 
     public void AddVertex(T vertex)
     {
@@ -35,20 +42,28 @@ public class MyALGraph<T>
         }
     }
 
-    public void AddEdge(T from, (T, int) edge)
+    private void Internal_AddEdge(T from, T to, int weight)
     {
-        if(nodesList.ContainsKey(from))
+        if (nodesList.ContainsKey(from))
         {
-            if (edge.Item1 != null)
+            if (to != null)
             {
-                nodesList[from].Add(edge);
+                nodesList[from].Add((to, weight));
             }
             else
             {
-                AddVertex(edge.Item1);
-                nodesList[from].Add(edge);
+                AddVertex(to);
+                nodesList[from].Add((to, weight));
             }
         }
+    }
+
+    public void AddEdge(T from, (T, int) edge)
+    {
+        Internal_AddEdge(from, edge.Item1, edge.Item2);
+
+        if (!IsDirectional)
+            Internal_AddEdge(edge.Item1, from, edge.Item2);
     }
 
     public void RemoveEdge(T from, T to)
