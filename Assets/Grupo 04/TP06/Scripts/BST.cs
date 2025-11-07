@@ -1,3 +1,4 @@
+using MyLinkedList;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -80,6 +81,14 @@ namespace MyBST
             //obtener valores en ascendente
         }
 
+        public MyList<T> InOrderMyList()
+        {
+            MyList<T> list = new MyList<T>();
+            InOrderListRecursive(root, list);
+            return list;
+            //obtener valores en ascendente
+        }
+
         private void InOrderListRecursive(Node<T> node, SimpleList<T> list)
         {
             if (node == null) return;
@@ -88,7 +97,14 @@ namespace MyBST
             list.Add(node.Value);
             InOrderListRecursive(node.left, list); // luego izquierda (menores)
         }
+        private void InOrderListRecursive(Node<T> node, MyList<T> list)
+        {
+            if (node == null) return;
 
+            InOrderListRecursive(node.right, list); // derecha primero (mayores)
+            list.Add(node.Value);
+            InOrderListRecursive(node.left, list); // luego izquierda (menores)
+        }
         private void InOrderRecursive(Node<T> Nodo)
         {
             if (Nodo == null)

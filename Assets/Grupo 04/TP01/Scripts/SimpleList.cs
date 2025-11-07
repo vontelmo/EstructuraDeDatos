@@ -86,7 +86,7 @@ public class SimpleList<T> : ISimpleList<T>, IEnumerable<T>
 
     public IEnumerator<T> GetEnumerator()
     {
-        for (int i = 0; i < array.Length; i++)
+        for (int i = 0; i < count; i++)
         {
             yield return array[i];
         }

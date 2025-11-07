@@ -1,4 +1,5 @@
 using MyBST;
+using MyLinkedList;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -33,6 +34,9 @@ public class TP07Execute : MonoBehaviour
 
     SimpleList<int> orderedScores = new SimpleList<int>();
 
+    MyList<string> leaderboard = new MyList<string>();
+
+
     private Dictionary<string, int> scoreDictionary = new Dictionary<string, int>();
 
     private void Start()
@@ -48,26 +52,30 @@ public class TP07Execute : MonoBehaviour
         for (int i = 0; i <100; i++)
         {
             string name = names[Random.Range(0, names.Count)];
-
-            scoreDictionary.Add(name, orderedScores[i]);
+            leaderboard.Add($"{name}: {orderedScores[i]}");
+            //scoreDictionary.Add(name, orderedScores[i]);
             names.Remove(name);
         }
 
         DrawLeaderboard();
 
     }
+
     private void DrawLeaderboard()
     {
 
         foreach (Transform child in contentHolder)
             Destroy(child.gameObject);
 
-        foreach (int value in scoreDictionary.Values)
+        int index = 0;
+
+        foreach (int value in orderedScores)
         {
             GameObject newItem = Instantiate(displayNamePrefab, contentHolder);
-            TMPro.TMP_Text text = newItem.GetComponentInChildren<TMPro.TMP_Text>();
+            TMP_Text text = newItem.GetComponentInChildren<TMP_Text>();
 
-            text.text = scoreDictionary.FirstOrDefault(v => v.Value == value).Key + ": " + value.ToString();
+            text.text = leaderboard[index];
+            index++;
         }
     }
 
@@ -78,8 +86,24 @@ public class TP07Execute : MonoBehaviour
         if (int.TryParse(inputText, out int value))
         {
             tree.Insert(value);
-            string lastName = "PLAYER" + counter;
-            scoreDictionary.Add(lastName, value);
+            orderedScores = tree.InOrderList();
+            
+            string lastName = "PLAYER_" + counter;
+
+            int index = -1;
+
+            for (int i = 0; i < orderedScores.Count; i++) 
+            {
+                if (value == orderedScores[i])
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            leaderboard.Insert(index, $"{lastName}: {value}");
+
+
             //ordenar diccionarioa sjdlknald nñsdjadñ
             inputField.text = "";
             

@@ -30,7 +30,7 @@ public class TP09Execute : MonoBehaviour
     List<string> completedList = new List<string>();
     private List<Planet> selectedPath = new List<Planet>();
 
-
+    int travelWeight = 0;
 
     private void Start()
     {
@@ -107,10 +107,15 @@ public class TP09Execute : MonoBehaviour
                 textResult.text = "Invalid Path :(";
                 break;
             }
+
+            travelWeight += (int)planetGraph.GetWeight(current, next); 
+
         }
         if (validPath)
-            textResult.text = "Valid Path :D";
-
+        {
+            textResult.text = $"Valid Path :D, Total Weight of the path: {travelWeight}";
+        }
+        travelWeight = 0;
     }
 
     public void SpreedSheetOnOff()
@@ -119,16 +124,6 @@ public class TP09Execute : MonoBehaviour
         GraphSpreadSheet.SetActive(!GraphSpreadSheet.activeSelf);
 
     }
-
-    public void ClearPath()
-    {
-        selectedPath.Clear();
-
-        foreach (Transform child in hotbarPlanetGrid)
-            Destroy(child.gameObject);
-
-    }
-
 
     private List<string> CreateGraphList(Planet[] planetCollection)
     {
