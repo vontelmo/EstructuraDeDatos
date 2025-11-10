@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class TP06Execute : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class TP06Execute : MonoBehaviour
     [SerializeField] private RectTransform treeContainer;
     [SerializeField] private float xSpacing = 200f;
     [SerializeField] private float ySpacing = 120f;
+    [SerializeField] TMP_InputField inputField;
 
     private BST<int> tree;
 
@@ -32,6 +35,22 @@ public class TP06Execute : MonoBehaviour
     {
         tree = bst;
         DrawTree();
+    }
+
+    public void InsetNode()
+    {
+        string inputText = inputField.text;
+        if (int.TryParse(inputText, out int value))
+        {
+            tree.Insert(value);
+            DrawTree();
+            inputField.text = "";
+
+        }
+        else
+        {
+            Debug.Log("invalid dataa");
+        }
     }
 
     public void DrawTree()
@@ -56,6 +75,7 @@ public class TP06Execute : MonoBehaviour
         // Posición
         float xPos = parentX + xOffset;
         float yPos = -depth * ySpacing;
+
         RectTransform NodeRect = newNode.GetComponent<RectTransform>();
         NodeRect.anchoredPosition = new Vector2(xPos, yPos);
 

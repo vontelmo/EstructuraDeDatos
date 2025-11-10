@@ -24,7 +24,6 @@ public class TP07Execute : MonoBehaviour
     "BELIX", "CARON", "DORIX", "FERAX", "HARON", "JIROX", "LERIX", "MORAX", "NORAN", "PERIX",
     "RANDY", "RARIX", "SERAN", "TARIX", "VERAN", "XARON", "YERIX", "ZORAN", "KERIX", "LORIN"};
 
-    SimpleList<string> auxNames = new SimpleList<string>();
 
     [SerializeField] private RectTransform contentHolder;
 
