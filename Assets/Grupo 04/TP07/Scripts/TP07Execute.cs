@@ -103,7 +103,6 @@ public class TP07Execute : MonoBehaviour
             leaderboard.Insert(index, $"{lastName}: {value}");
 
 
-            //ordenar diccionarioa sjdlknald nñsdjadñ
             inputField.text = "";
             
         }

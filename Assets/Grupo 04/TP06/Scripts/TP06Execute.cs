@@ -1,4 +1,4 @@
-using MyBST;
+﻿using MyBST;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -72,25 +72,26 @@ public class TP06Execute : MonoBehaviour
         TMP_Text text = newNode.GetComponentInChildren<TMP_Text>();
         text.text = Node.Value.ToString();
 
-        // Posici�n
+        // Calcula posición
         float xPos = parentX + xOffset;
         float yPos = -depth * ySpacing;
 
-        RectTransform NodeRect = newNode.GetComponent<RectTransform>();
-        NodeRect.anchoredPosition = new Vector2(xPos, yPos);
+        RectTransform nodeRect = newNode.GetComponent<RectTransform>();
+        nodeRect.anchoredPosition = new Vector2(xPos, yPos);
 
-        float childOffset = Mathf.Max(60, xSpacing / (depth + 1));
+        // Espaciado basado en la profundidad (más abajo → menos separación)
+        float childOffset = xSpacing / Mathf.Pow(2, depth + 1);
 
         if (Node.left != null)
         {
             GameObject leftChild = DrawNode(Node.left, depth + 1, -childOffset, xPos);
-            DrawLine(NodeRect, leftChild.GetComponent<RectTransform>());
+            DrawLine(nodeRect, leftChild.GetComponent<RectTransform>());
         }
 
         if (Node.right != null)
         {
             GameObject rightChild = DrawNode(Node.right, depth + 1, childOffset, xPos);
-            DrawLine(NodeRect, rightChild.GetComponent<RectTransform>());
+            DrawLine(nodeRect, rightChild.GetComponent<RectTransform>());
         }
 
         return newNode;
@@ -116,5 +117,33 @@ public class TP06Execute : MonoBehaviour
         float angle = Mathf.Atan2(end.y - start.y, end.x - start.x) * Mathf.Rad2Deg;
         rect.rotation = Quaternion.Euler(0, 0, angle - 90);
     }
+
+    public void PrintInOrder()
+    {
+        Debug.Log("=== IN ORDER ===");
+        tree.InOrder();
+    }
+
+    public void PrintPreOrder()
+    {
+        Debug.Log("=== PRE ORDER ===");
+        tree.PreOrder();
+    }
+
+    public void PrintPostOrder()
+    {
+        Debug.Log("=== POST ORDER ===");
+        tree.PostOrder();
+    }
+
+    public void PrintLevelOrder()
+    {
+        Debug.Log("=== LEVEL ORDER ===");
+        if (tree.Root != null)
+            tree.LevelOrder(tree.Root);
+        else
+            Debug.Log("Tree is empty");
+    }
+
 
 }

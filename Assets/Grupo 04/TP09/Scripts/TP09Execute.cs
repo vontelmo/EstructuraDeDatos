@@ -149,11 +149,72 @@ public class TP09Execute : MonoBehaviour
 
             foreach(Planet planetEdge in planetList)
             {
-                if (RandomInt(100) > 70 && planetVertex != planetEdge)
+                if (RandomInt(100) > 80 && planetVertex != planetEdge)
                     planetGraph.AddEdge(planetVertex, (planetEdge, RandomInt(10)));
             }
         }
     }
 
     private int RandomInt(int range) { return Random.Range(0, range); }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        GUIStyle black = new GUIStyle();
+        black.normal.textColor = Color.black;
+        black.fontStyle = FontStyle.Bold;
+
+        if (planetGraph == null || planetGraph.NodeList == null || planetGraph.NodeList.Count == 0)
+            return;
+
+        Gizmos.color = Color.cyan;
+
+        // asigna posiciones espaciales a cada planeta
+        Dictionary<Planet, Vector3> planetPositions = new Dictionary<Planet, Vector3>();
+
+        float radius = 4f;
+        int total = planetGraph.NodeList.Count;
+        int index = 0;
+
+        // distribuir planetas en círculo
+        foreach (Planet planet in planetGraph.NodeList.Keys)
+        {
+            float angle = index * Mathf.PI * 2 / total;
+            Vector3 pos = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
+            planetPositions[planet] = pos;
+            index++;
+        }
+
+        // dibujar nodos y aristas
+        foreach (var kvp in planetGraph.NodeList)
+        {
+            Planet planet = kvp.Key;
+            Vector3 planetPos = planetPositions[planet];
+
+            // Dibuja el nodo
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(planetPos, 0.1f);
+            UnityEditor.Handles.Label(planetPos + Vector3.up * 0.5f, planet.name, black);
+
+            // Dibuja las conexiones
+            Gizmos.color = Color.black;
+            foreach (var edge in kvp.Value)
+            {
+                Planet target = edge.Item1;
+                int weight = edge.Item2;
+
+                if (planetPositions.ContainsKey(target))
+                {
+                    Vector3 targetPos = planetPositions[target];
+                    Gizmos.DrawLine(planetPos, targetPos);
+
+                    // dibujar peso
+                    Vector3 mid = (planetPos + targetPos) / 2;
+                    UnityEditor.Handles.Label(mid, weight.ToString());
+                }
+            }
+        }
+    }
+#endif
+
 }

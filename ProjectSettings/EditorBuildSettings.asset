@@ -35,5 +35,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Grupo 04/TP05/Scenes/TP05.unity
     guid: a79a00a42d827164aba0af6e46f606e7
+  - enabled: 1
+    path: Assets/Grupo 04/TP06/Scenes/TP06BST.unity
+    guid: fe96de1f2fe552945a0c06419a3c55ad
+  - enabled: 1
+    path: Assets/Grupo 04/TP07/Scenes/TP07AVLTree.unity
+    guid: 2e0555bfd61744447b8587238179106a
+  - enabled: 1
+    path: Assets/Grupo 04/TP08/Scenes/TP08.unity
+    guid: 413dc4c0f5540f540818735f497f34a2
+  - enabled: 1
+    path: Assets/Grupo 04/TP09/Scenes/TP09.unity
+    guid: 456477fe529c5eb4081ef0216c63c8a0
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
