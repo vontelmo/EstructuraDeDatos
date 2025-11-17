@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
-using UnityEngine.UI;
 
 public class Dijkstra
 {
-    // Falta que MyGraphNode implemente IEquatable (lo pide el Graph)
     public static Dictionary<MyGraphNode, (MyGraphNode predecesor, int distance)> ExecuteDijksta (MyALGraph<MyGraphNode> graph, MyGraphNode origin)
     {
         Dictionary<MyGraphNode, (MyGraphNode, int)> result = new();
@@ -30,7 +28,6 @@ public class Dijkstra
         while (UnvisitedNodes.Count > 0)
         {
             MyGraphNode currentNode = UnvisitedNodes.Dequeue();
-
             List<MyGraphNode> unvisitedNeighbors = new();
 
             //Actualizar vecinos
@@ -56,10 +53,10 @@ public class Dijkstra
             }
 
             //Ordenamos la lista de vecinos de menor a mayor por el costo total del diccionario
-            unvisitedNeighbors.OrderBy(node => result[node].Item2);
+            unvisitedNeighbors = unvisitedNeighbors.OrderBy(node => result[node].Item2).ToList();
 
             //-Encolamos todos los vecinos en orden de menor costo en el diccionario a mayor
-            foreach (var neighbor in unvisitedNeighbors)
+            foreach (MyGraphNode neighbor in unvisitedNeighbors)
             {
                 UnvisitedNodes.Enqueue(neighbor);
             }
@@ -71,17 +68,15 @@ public class Dijkstra
         return result;
     }
 
-    List<MyGraphNode> ExecuteDijkstaPathfinding(MyGraphNode origin, MyGraphNode destination)
+    //Aca iria lo mismo que el Dijkstra anterior, PERO
+    //1) En vez de int, float (lo sacan de los neighbors de cada nodo)
+    //2) No necesitan el grafo (idem punto anterior)
+    //3) Cuando encuentran el nodo destination dentro del while, retorna el camino calculado
+    //4) Si llegan al final del while y no encontraron el nodo destination, devuelven la lista vacia
+    //5) Para reconstruir el path, usan el previo de cada nodo, desde el ultimo (seria, del diccionario el Item1) hasta el origin
+
+    List<MyGraphNode> ExecuteDijkstaPathfinding(MyGraphNode origin, MyGraphNode destination, MyALGraph<MyGraphNode> graph)
     {
-        List<MyGraphNode> path = new();
-
-        //Aca iria lo mismo que el Dijkstra anterior, PERO
-        //1) En vez de int, float (lo sacan de los neighbors de cada nodo)
-        //2) No necesitan el grafo (idem punto anterior)
-        //3) Cuando encuentran el nodo destination dentro del while, retorna el camino calculado
-        //4) Si llegan al final del while y no encontraron el nodo destination, devuelven la lista vacia
-        //5) Para reconstruir el path, usan el previo de cada nodo, desde el ultimo (seria, del diccionario el Item1) hasta el origin
-
         Dictionary<MyGraphNode, (MyGraphNode, float)> result = new();
 
         // Coleccion de nodos no vistados
@@ -94,7 +89,7 @@ public class Dijkstra
         UnvisitedNodes.Enqueue(origin);
 
         //Inicializar distancias
-        foreach (MyGraphNode node in path)
+        foreach (MyGraphNode node in graph.Vertices)
         {
             result[node] = (null, int.MaxValue);
         }
@@ -104,11 +99,21 @@ public class Dijkstra
         while (UnvisitedNodes.Count > 0)
         {
             MyGraphNode currentNode = UnvisitedNodes.Dequeue();
-
             List<MyGraphNode> unvisitedNeighbors = new();
 
-            if (currentNode == destination)
+            if (currentNode.Equals(destination))
             {
+                // Reconstruir path
+                List<MyGraphNode> path = new();
+                MyGraphNode node = destination;
+
+                while (node != null)
+                {
+                    path.Add(node);
+                    node = result[node].Item1;
+                }
+
+                path.Reverse();
                 return path;
             }
 
@@ -135,7 +140,7 @@ public class Dijkstra
             }
 
             //Ordenamos la lista de vecinos de menor a mayor por el costo total del diccionario
-            unvisitedNeighbors.OrderBy(node => result[node].Item2);
+            unvisitedNeighbors.OrderBy(node => result[node].Item2).ToList();
 
             //-Encolamos todos los vecinos en orden de menor costo en el diccionario a mayor
             foreach (var neighbor in unvisitedNeighbors)
@@ -147,12 +152,8 @@ public class Dijkstra
             visitedNodes.Add(currentNode);
         }
 
-        while (true)
-        {
-            
-        }
-
-        return path;
+        // No se encontro destino
+        return new List<MyGraphNode>();
     }
 
     //Si fueran a hacer A*, seria mejor usar una list que una Queue, asi siempre sacan el de menor costo
