@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 
 public class Dijkstra
 {
@@ -75,7 +74,7 @@ public class Dijkstra
     //4) Si llegan al final del while y no encontraron el nodo destination, devuelven la lista vacia
     //5) Para reconstruir el path, usan el previo de cada nodo, desde el ultimo (seria, del diccionario el Item1) hasta el origin
 
-    List<MyGraphNode> ExecuteDijkstaPathfinding(MyGraphNode origin, MyGraphNode destination, MyALGraph<MyGraphNode> graph)
+    public List<MyGraphNode> ExecuteDijkstaPathfinding(MyGraphNode origin, MyGraphNode destination, MyALGraph<MyGraphNode> graph)
     {
         Dictionary<MyGraphNode, (MyGraphNode, float)> result = new();
 
