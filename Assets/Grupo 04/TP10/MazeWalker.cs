@@ -11,6 +11,7 @@ public class MazeWalker : MonoBehaviour
     public void StartWalking(List<MyGraphNode> path)
     {
         // Convertir nodos a posiciones del mundo
+
         worldPath = new List<Vector3>();
         foreach (var node in path)
         {

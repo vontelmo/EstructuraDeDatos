@@ -78,35 +78,4 @@ public static class MazeBuilder
 
         return (entrance, exit);
     }
-
-    public static bool PathIsValid(MyALGraph<MyGraphNode> graph, MyGraphNode entrance, MyGraphNode exit)
-    {
-        Dictionary<MyGraphNode, (MyGraphNode predecesor, int distance)> result = Dijkstra.ExecuteDijksta(graph, entrance);
-
-        if (result.ContainsKey(exit) && result[exit].distance != int.MaxValue)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public static List<MyGraphNode> GetPath(MyALGraph<MyGraphNode> graph, MyGraphNode entrance, MyGraphNode exit)
-    {
-        var result = Dijkstra.ExecuteDijksta(graph, entrance);
-        List<MyGraphNode > path = new List<MyGraphNode>();
-
-        if (!result.ContainsKey(exit) || result[exit].distance == int.MaxValue)
-            return path;
-
-        MyGraphNode current = exit;
-
-        while (current != null)
-        {
-            path.Add(current);
-            current = result[current].predecesor;
-        }
-
-        path.Reverse();
-        return path;
-    }
 }

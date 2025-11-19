@@ -10,6 +10,9 @@ public class MazeButtonController : MonoBehaviour
     private MyGraphNode entrance;
     private MyGraphNode exit;
 
+    private List<MyGraphNode> currentPath;
+    private bool mapChanged; //TODO: setear en true cada vez que se pinte un tile nuevo
+
     void Start()
     {
         nodes = MazeBuilder.BuildGraph(mazeGrid);
@@ -18,7 +21,24 @@ public class MazeButtonController : MonoBehaviour
 
     public void OnButtonPressed()
     {
-        List<MyGraphNode> path = MazeBuilder.GetPath(new MyALGraph<MyGraphNode>(false), entrance, exit);
-        walker.StartWalking(path);
+        GetPath(new MyALGraph<MyGraphNode>(false), entrance, exit);
+        walker.StartWalking(currentPath);
+    }
+
+    public bool PathIsValid(MyALGraph<MyGraphNode> graph, MyGraphNode entrance, MyGraphNode exit)
+    {
+        if (mapChanged) GetPath(graph, entrance, exit);
+        return currentPath.Count > 0; 
+    }
+
+    public void GetPath(MyALGraph<MyGraphNode> graph, MyGraphNode entrance, MyGraphNode exit)
+    {
+        currentPath = Dijkstra.ExecuteDijkstaPathfinding(entrance, exit, graph);
+        mapChanged = false;
+    }
+
+    public void SetMapChanged()
+    {
+        mapChanged = true;
     }
 }
