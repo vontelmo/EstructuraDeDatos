@@ -8,6 +8,8 @@ public class MazeWalker : MonoBehaviour
     private List<Vector3> worldPath;
     private bool isWalking = false;
 
+    private int counter;
+
     public void StartWalking(List<MyGraphNode> path)
     {
         // Convertir nodos a posiciones del mundo
@@ -17,7 +19,7 @@ public class MazeWalker : MonoBehaviour
         {
             worldPath.Add(new Vector3(node.X, node.Y, 0));
         }
-
+        Debug.Log(isWalking);
         if (!isWalking)
             StartCoroutine(WalkPath());
     }
@@ -37,6 +39,8 @@ public class MazeWalker : MonoBehaviour
 
                 yield return null;
             }
+            Debug.Log("step : " + counter);
+            counter++;
         }
 
         isWalking = false;

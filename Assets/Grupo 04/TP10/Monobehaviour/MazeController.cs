@@ -13,8 +13,12 @@ public class MazeButtonController : MonoBehaviour
     private List<MyGraphNode> currentPath;
     private bool mapChanged; //TODO: setear en true cada vez que se pinte un tile nuevo
 
+    [SerializeField] int rows, columns;
+
     void Start()
     {
+        Debug.Log("hola si existo");
+        mazeGrid = new TileType[rows,columns];   
         nodes = MazeBuilder.BuildGraph(mazeGrid);
         (entrance, exit) = MazeBuilder.FindEntranceExit(nodes, mazeGrid);
     }
