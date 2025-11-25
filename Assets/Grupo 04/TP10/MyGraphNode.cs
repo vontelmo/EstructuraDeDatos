@@ -25,7 +25,7 @@ public class MyGraphNode : IEquatable<MyGraphNode>
 
     public bool Equals(MyGraphNode other)
     {
-        if (other.Equals(null))
+        if (other == null)
             return false;
 
         return X == other.X && Y == other.Y;

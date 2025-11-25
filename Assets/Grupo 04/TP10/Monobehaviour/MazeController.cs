@@ -1,32 +1,52 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MazeButtonController : MonoBehaviour
 {
     public MazeWalker walker;      // game object
+    TilemapToMatrix tilemapToMatrix;
     public TileType[,] mazeGrid;   // matriz del laberinto
 
-    private Dictionary<(int, int), MyGraphNode> nodes;
+    private Dictionary<(int, int), MyGraphNode> nodes = new();
+    private MyALGraph<MyGraphNode> graph;
     private MyGraphNode entrance;
     private MyGraphNode exit;
+
 
     private List<MyGraphNode> currentPath;
     private bool mapChanged; //TODO: setear en true cada vez que se pinte un tile nuevo
 
-    [SerializeField] int rows, columns;
-
     void Start()
     {
-        Debug.Log("hola si existo");
-        mazeGrid = new TileType[rows,columns];   
+        tilemapToMatrix = GetComponent<TilemapToMatrix>();
+        mazeGrid = tilemapToMatrix.ConvertTilemapToMatrix();
+
+        // Crear nodos
         nodes = MazeBuilder.BuildGraph(mazeGrid);
+
+        // Crear grafo
+        graph = MazeBuilder.BuildALGraph(nodes);
+
+        // Buscar entrada / salida
         (entrance, exit) = MazeBuilder.FindEntranceExit(nodes, mazeGrid);
     }
 
     public void OnButtonPressed()
     {
-        GetPath(new MyALGraph<MyGraphNode>(false), entrance, exit);
+        GetPath(graph, entrance, exit);
         walker.StartWalking(currentPath);
+
+        for (int y = 0; y < mazeGrid.GetLength(1); y++)
+        {
+             
+            string row = "";
+            for (int x = 0; x < mazeGrid.GetLength(0); x++)
+            {
+                row += mazeGrid[x, y] + " ";
+            }
+            Debug.Log(row);
+        }
     }
 
     public bool PathIsValid(MyALGraph<MyGraphNode> graph, MyGraphNode entrance, MyGraphNode exit)
