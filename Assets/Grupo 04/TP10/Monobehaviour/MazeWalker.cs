@@ -39,10 +39,7 @@ public class MazeWalker : MonoBehaviour
 
                 yield return null;
             }
-            Debug.Log("step : " + counter);
-            counter++;
         }
 
-        isWalking = false;
     }
 }

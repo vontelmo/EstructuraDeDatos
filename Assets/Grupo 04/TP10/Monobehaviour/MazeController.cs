@@ -37,9 +37,10 @@ public class MazeButtonController : MonoBehaviour
         GetPath(graph, entrance, exit);
         walker.StartWalking(currentPath);
 
-        for (int y = 0; y < mazeGrid.GetLength(1); y++)
+        //Debug Matriz
+
+        for (int y = mazeGrid.GetLength(1) - 1; y >= 0; y--)
         {
-             
             string row = "";
             for (int x = 0; x < mazeGrid.GetLength(0); x++)
             {
@@ -47,6 +48,7 @@ public class MazeButtonController : MonoBehaviour
             }
             Debug.Log(row);
         }
+
     }
 
     public bool PathIsValid(MyALGraph<MyGraphNode> graph, MyGraphNode entrance, MyGraphNode exit)

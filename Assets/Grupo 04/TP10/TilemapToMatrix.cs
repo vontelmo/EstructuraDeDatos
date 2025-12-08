@@ -53,10 +53,12 @@ public class TilemapToMatrix : MonoBehaviour
             else if (tile == startTile && startCount < 1)
             {
                 matrix[x, y] = TileType.Entrance;
+                startCount++;
             }
             else if (tile == exitTile && exitCount < 1)
             {
                 matrix[x, y] = TileType.Exit;
+                exitCount++;
             }
             else
             {

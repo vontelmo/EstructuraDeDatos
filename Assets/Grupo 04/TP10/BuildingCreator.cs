@@ -94,6 +94,10 @@ public class BuildingCreator : Singleton<BuildingCreator>
     public void ObjectSelected(BuildingAsset obj)
     {
         SelectedObj = obj;
+        if (obj.TileType == TileType.Entrance)
+        {
+        }
+
     }
 
     private void UpdatePreview()
