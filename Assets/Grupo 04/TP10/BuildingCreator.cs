@@ -6,11 +6,15 @@ using UnityEngine.Tilemaps;
 
 public class BuildingCreator : Singleton<BuildingCreator>
 {
-    [SerializeField]Tilemap previewMap, defaultMap;
+    [SerializeField] Tilemap previewMap, defaultMap;
     Inputs playerInput;
+
+    public Tilemap DefaultMap => defaultMap;
 
     TileBase tileBase;
     BuildingAsset selectedObj;
+
+    MazeButtonController mazeController;
 
     Camera _camera;
 
@@ -23,6 +27,7 @@ public class BuildingCreator : Singleton<BuildingCreator>
         base.Awake();
         playerInput = new Inputs();
         _camera = Camera.main;
+        mazeController = GetComponent<MazeButtonController>();
     }
 
     private void OnEnable()
@@ -83,6 +88,7 @@ public class BuildingCreator : Singleton<BuildingCreator>
         if (selectedObj != null)
         {
             HandleDrawing();
+            mazeController.SetMapChanged();
         }
     }
 

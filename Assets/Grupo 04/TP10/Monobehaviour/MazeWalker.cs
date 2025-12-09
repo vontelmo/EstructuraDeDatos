@@ -10,6 +10,15 @@ public class MazeWalker : MonoBehaviour
 
     private int counter;
 
+    BuildingCreator buildingCreator;
+
+
+    private void Awake()
+    {
+        buildingCreator = BuildingCreator.GetInstance();
+    }
+
+
     public void StartWalking(List<MyGraphNode> path)
     {
         // Convertir nodos a posiciones del mundo
@@ -17,9 +26,11 @@ public class MazeWalker : MonoBehaviour
         worldPath = new List<Vector3>();
         foreach (var node in path)
         {
-            worldPath.Add(new Vector3(node.X, node.Y, 0));
+            Vector3 cellPosition = buildingCreator.DefaultMap.GetCellCenterWorld(buildingCreator.DefaultMap.origin + new Vector3Int(node.X, node.Y, 0));
+            worldPath.Add(cellPosition);
+            Debug.Log(cellPosition);
         }
-        Debug.Log(isWalking);
+
         if (!isWalking)
             StartCoroutine(WalkPath());
     }
@@ -40,6 +51,6 @@ public class MazeWalker : MonoBehaviour
                 yield return null;
             }
         }
-
+        isWalking = false;
     }
 }

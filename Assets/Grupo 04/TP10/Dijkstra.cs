@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Dijkstra
 {
-    public static Dictionary<MyGraphNode, (MyGraphNode predecesor, int distance)> ExecuteDijksta (MyALGraph<MyGraphNode> graph, MyGraphNode origin)
+    public static Dictionary<MyGraphNode, (MyGraphNode predecesor, int distance)> ExecuteDijksta(MyALGraph<MyGraphNode> graph, MyGraphNode origin)
     {
         Dictionary<MyGraphNode, (MyGraphNode, int)> result = new();
 
@@ -39,7 +39,7 @@ public class Dijkstra
                 {
                     //-Sumar esos costos al costo que tiene el nodo que estas visitando en el diccionario
                     int costToNeighbor = (int)graph.GetWeight(currentNode, neighbor);
-                    
+
                     //Si esto fuera A*, a totalCost le sumamos la heuristica (calculo estimado desde este vecino al destination)
                     int totalCost = costToNeighbor + result[currentNode].Item2;
 
@@ -125,10 +125,10 @@ public class Dijkstra
                 if (!visitedNodes.Contains(neighbor))
                 {
                     //-Sumar esos costos al costo que tiene el nodo que estas visitando en el diccionario
-                    float costToNeighbor = result[currentNode].Item2 + result[neighbor].Item2;
+                    float costToNeighbor = (float)graph.GetWeight(currentNode, neighbor);
 
                     //Si esto fuera A*, a totalCost le sumamos la heuristica (calculo estimado desde este vecino al destination)
-                    float totalCost = costToNeighbor + result[currentNode].Item2;
+                    float totalCost = result[currentNode].Item2 + costToNeighbor;
 
                     //-Para cada vecino, si la suma de ambos costos es < al costo actual del vecino en el diccionario, actualizamos ese valor
                     if (totalCost < result[neighbor].Item2)
@@ -141,7 +141,7 @@ public class Dijkstra
             }
 
             //Ordenamos la lista de vecinos de menor a mayor por el costo total del diccionario
-            unvisitedNeighbors.OrderBy(node => result[node].Item2).ToList();
+            unvisitedNeighbors = unvisitedNeighbors.OrderBy(n => result[n].Item2).ToList();
 
             //-Encolamos todos los vecinos en orden de menor costo en el diccionario a mayor
             foreach (var neighbor in unvisitedNeighbors)

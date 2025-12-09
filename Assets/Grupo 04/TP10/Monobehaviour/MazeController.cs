@@ -13,13 +13,29 @@ public class MazeButtonController : MonoBehaviour
     private MyGraphNode entrance;
     private MyGraphNode exit;
 
+    BuildingCreator buildingCreator;
 
-    private List<MyGraphNode> currentPath;
-    private bool mapChanged; //TODO: setear en true cada vez que se pinte un tile nuevo
+    private List<MyGraphNode> currentPath = new();
+    private bool mapChanged = true; //TODO: setear en true cada vez que se pinte un tile nuevo
 
     void Start()
     {
+        mazeGrid = new TileType[0,0];
+        buildingCreator = BuildingCreator.GetInstance();
         tilemapToMatrix = GetComponent<TilemapToMatrix>();
+
+        LoadTileMap();
+
+        Debug.Log(currentPath.Count + " : start");
+    }
+
+    private void LoadTileMap()
+    {
+        currentPath.Clear();
+        if (mazeGrid.Length > 0)
+        {
+            tilemapToMatrix.ClearMatrix(mazeGrid);
+        }
         mazeGrid = tilemapToMatrix.ConvertTilemapToMatrix();
 
         // Crear nodos
@@ -34,11 +50,20 @@ public class MazeButtonController : MonoBehaviour
 
     public void OnButtonPressed()
     {
-        GetPath(graph, entrance, exit);
-        walker.StartWalking(currentPath);
+        if (PathIsValid(graph, entrance, exit))
+        {
+            walker.transform.position = buildingCreator.DefaultMap.GetCellCenterWorld(buildingCreator.DefaultMap.origin + new Vector3Int(currentPath[0].X, currentPath[0].Y, 0));
+            walker.StartWalking(currentPath);
+            Debug.Log(currentPath.Count + " : button got path");
+        }
+        else
+        {
+            Debug.LogWarning("Get a valid Path First");
+        }
+    }
 
-        //Debug Matriz
-
+    private void PrintMatrix()
+    {
         for (int y = mazeGrid.GetLength(1) - 1; y >= 0; y--)
         {
             string row = "";
@@ -53,8 +78,12 @@ public class MazeButtonController : MonoBehaviour
 
     public bool PathIsValid(MyALGraph<MyGraphNode> graph, MyGraphNode entrance, MyGraphNode exit)
     {
-        if (mapChanged) GetPath(graph, entrance, exit);
-        return currentPath.Count > 0; 
+        if (mapChanged)
+        {
+            LoadTileMap();
+            GetPath(graph, entrance, exit);
+        }
+        return currentPath.Count > 0;
     }
 
     public void GetPath(MyALGraph<MyGraphNode> graph, MyGraphNode entrance, MyGraphNode exit)

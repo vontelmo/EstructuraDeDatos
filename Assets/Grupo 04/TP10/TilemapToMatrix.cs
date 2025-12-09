@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class TilemapToMatrix : MonoBehaviour
     private int startCount = 0;
     private int exitCount = 0;
 
+    TileType[,] matrix;
+
     public TileType[,] ConvertTilemapToMatrix()
     {
         // Determinar bounds del tilemap
@@ -25,7 +28,7 @@ public class TilemapToMatrix : MonoBehaviour
         int width = bounds.size.x;
         int height = bounds.size.y;
 
-        TileType[,] matrix = new TileType[width, height];
+        matrix = new TileType[width, height];
 
         // Recorrer celda por celda
         foreach (Vector3Int pos in bounds.allPositionsWithin)
@@ -50,16 +53,22 @@ public class TilemapToMatrix : MonoBehaviour
             {
                 matrix[x, y] = TileType.Wall;
             }
-            else if (tile == startTile && startCount < 1)
+            else if (tile == startTile)
             {
                 matrix[x, y] = TileType.Entrance;
                 startCount++;
             }
-            else if (tile == exitTile && exitCount < 1)
+
+            else if (startCount > 1) Debug.LogWarning("Cant place more than one entrance");
+
+            else if (tile == exitTile)
             {
                 matrix[x, y] = TileType.Exit;
                 exitCount++;
             }
+
+            else if (exitCount > 1) Debug.LogWarning("Cant place more than one exit");
+
             else
             {
                 // default fallback
@@ -69,4 +78,7 @@ public class TilemapToMatrix : MonoBehaviour
 
         return matrix;
     }
+
+    public void ClearMatrix(TileType[,] matrix) { Array.Clear(matrix, 0, matrix.Length);}
+
 }
