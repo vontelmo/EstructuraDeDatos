@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class MazeButtonController : MonoBehaviour
 {
-    public MazeWalker walker;      // game object
+    public MazeWalker walker;
+    public TMP_Text text;
     TilemapToMatrix tilemapToMatrix;
     public TileType[,] mazeGrid;   // matriz del laberinto
 
@@ -20,7 +22,7 @@ public class MazeButtonController : MonoBehaviour
 
     void Start()
     {
-        mazeGrid = new TileType[0,0];
+        mazeGrid = new TileType[0, 0];
         buildingCreator = BuildingCreator.GetInstance();
         tilemapToMatrix = GetComponent<TilemapToMatrix>();
 
@@ -32,10 +34,6 @@ public class MazeButtonController : MonoBehaviour
     private void LoadTileMap()
     {
         currentPath.Clear();
-        if (mazeGrid.Length > 0)
-        {
-            tilemapToMatrix.ClearMatrix(mazeGrid);
-        }
         mazeGrid = tilemapToMatrix.ConvertTilemapToMatrix();
 
         // Crear nodos
@@ -50,19 +48,21 @@ public class MazeButtonController : MonoBehaviour
 
     public void OnButtonPressed()
     {
-        if (PathIsValid(graph, entrance, exit))
+        if (PathIsValid() && tilemapToMatrix.IsPathValid)
         {
             walker.transform.position = buildingCreator.DefaultMap.GetCellCenterWorld(buildingCreator.DefaultMap.origin + new Vector3Int(currentPath[0].X, currentPath[0].Y, 0));
             walker.StartWalking(currentPath);
             Debug.Log(currentPath.Count + " : button got path");
+            text.text = "Path is valid";
         }
         else
         {
+            text.text = tilemapToMatrix.Message;
             Debug.LogWarning("Get a valid Path First");
         }
     }
 
-    private void PrintMatrix()
+    public void PrintMatrix()
     {
         for (int y = mazeGrid.GetLength(1) - 1; y >= 0; y--)
         {
@@ -76,17 +76,17 @@ public class MazeButtonController : MonoBehaviour
 
     }
 
-    public bool PathIsValid(MyALGraph<MyGraphNode> graph, MyGraphNode entrance, MyGraphNode exit)
+    public bool PathIsValid()
     {
         if (mapChanged)
         {
             LoadTileMap();
-            GetPath(graph, entrance, exit);
+            GetPath();
         }
-        return currentPath.Count > 0;
+        return currentPath != null && currentPath.Count > 0;
     }
 
-    public void GetPath(MyALGraph<MyGraphNode> graph, MyGraphNode entrance, MyGraphNode exit)
+    public void GetPath()
     {
         currentPath = Dijkstra.ExecuteDijkstaPathfinding(entrance, exit, graph);
         mapChanged = false;

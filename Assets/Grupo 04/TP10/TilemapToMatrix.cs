@@ -18,11 +18,20 @@ public class TilemapToMatrix : MonoBehaviour
     private int startCount = 0;
     private int exitCount = 0;
 
+    private string message;
+    private bool isPathValid;
+
+    public bool IsPathValid => isPathValid;
+    public string Message => message;
+
+
+
     TileType[,] matrix;
 
     public TileType[,] ConvertTilemapToMatrix()
     {
-        // Determinar bounds del tilemap
+        message = "Path is Invalid";
+        isPathValid = true;
         BoundsInt bounds = tilemap.cellBounds;
 
         int width = bounds.size.x;
@@ -30,7 +39,9 @@ public class TilemapToMatrix : MonoBehaviour
 
         matrix = new TileType[width, height];
 
-        // Recorrer celda por celda
+        startCount = 0;
+        exitCount = 0;
+
         foreach (Vector3Int pos in bounds.allPositionsWithin)
         {
             int x = pos.x - bounds.min.x;
@@ -38,11 +49,8 @@ public class TilemapToMatrix : MonoBehaviour
 
             TileBase tile = tilemap.GetTile(pos);
 
-
-
             if (tile == null)
             {
-                // Si quieres tratar 'sin tile' como Wall o Floor, elegí acá
                 matrix[x, y] = TileType.Wall;
             }
             else if (tile == floorTile)
@@ -58,27 +66,30 @@ public class TilemapToMatrix : MonoBehaviour
                 matrix[x, y] = TileType.Entrance;
                 startCount++;
             }
-
-            else if (startCount > 1) Debug.LogWarning("Cant place more than one entrance");
-
             else if (tile == exitTile)
             {
                 matrix[x, y] = TileType.Exit;
                 exitCount++;
             }
-
-            else if (exitCount > 1) Debug.LogWarning("Cant place more than one exit");
-
             else
             {
-                // default fallback
                 matrix[x, y] = TileType.Wall;
             }
+
+
+        }
+
+        if (startCount > 1 || exitCount > 1)
+        {
+            message = "Path is Invalid : more than one entrance or exit";
+            Debug.LogWarning("Cant place more than one entrance or exit");
+            isPathValid = false;
+
         }
 
         return matrix;
     }
-
-    public void ClearMatrix(TileType[,] matrix) { Array.Clear(matrix, 0, matrix.Length);}
-
 }
+
+
+

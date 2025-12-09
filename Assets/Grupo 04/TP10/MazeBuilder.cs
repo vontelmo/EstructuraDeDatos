@@ -1,13 +1,13 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
 public enum TileType
 {
-    Wall,       // Pared (negro)
-    Floor,      // Suelo (blanco)
-    Entrance,   // Entrada (azul)
-    Exit        // Salida (rojo)
+    Wall,       // Pared 
+    Floor,      // Suelo 
+    Entrance,   // Entrada 
+    Exit        // Salida 
 }
 
 public static class MazeBuilder
@@ -27,7 +27,7 @@ public static class MazeBuilder
                 {
                     nodes[(x, y)] = new MyGraphNode(x, y);
                 }
-                
+
             }
         }
 
@@ -83,7 +83,7 @@ public static class MazeBuilder
     {
         var graph = new MyALGraph<MyGraphNode>(false);
 
-        // Agregar vértices
+        // Agregar vï¿½rtices
         foreach (var node in nodes.Values)
             graph.AddVertex(node);
 
